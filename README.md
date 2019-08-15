@@ -18,7 +18,7 @@ MDC.put("tenantId", acme-corp);
 MDC.put("correlationId", 6afb775c-bf4d-11e9-9cb5-2a2ae2dbcce4);  
 ```  
 
-If tenant or CAF correlation id are not supplied the logger will substitute them the `-`and pad the rest of their character allotment with spaces. The logger will also pad any tenant id shorter than 30 characters to the 30 character limit, this is to aide readability of the logs by aligning the log statements.  
+If tenant or CAF correlation id are not supplied the logger will substitute them with a `-` and pad the rest of their character allotment with spaces. The logger will also pad any tenant id shorter than 30 characters to the 30 character limit, this is to aide readability of the logs by aligning the log statements.  
 
 To consume this library add the maven dependency to your project.  
 ```  
