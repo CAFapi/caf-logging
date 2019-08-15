@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright 2015-2018 Micro Focus or one of its affiliates.
+    Copyright 2019 Micro Focus or one of its affiliates.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -24,12 +24,49 @@
     <parent>
         <groupId>com.github.cafapi</groupId>
         <artifactId>caf-common-parent</artifactId>
-        <version>1.1.0-11</version>
+        <version>2.0.0-63</version>
     </parent>
 
     <groupId>com.github.cafapi</groupId>
     <artifactId>caf-logging</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+
+    <description>CAF Standard Logback Configuration</description>
+    <url>https://github.com/CAFapi/caf-logging</url>
+
+    <inceptionYear>2019</inceptionYear>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>dermot-hardy</id>
+            <name>Dermot Hardy</name>
+            <email>dermot.hardy@microfocus.com</email>
+        </developer>
+        <developer>
+            <id>anthony-mcgreevy</id>
+            <name>Anthony McGreevey</name>
+            <email>anthony.mcgreevy@microfocus.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/CAFapi/caf-logging.git</connection>
+        <developerConnection>scm:git:https://github.com/CAFapi/caf-logging.git</developerConnection>
+        <url>https://github.com/CAFapi/caf-logging</url>
+    </scm>
+
+    <properties>
+        <copyrightYear>2019</copyrightYear>
+        <copyrightNotice>Copyright ${copyrightYear} Micro Focus or one of its affiliates.</copyrightNotice>
+        <enforceCorrectDependencies>true</enforceCorrectDependencies>
+    </properties>
 
     <dependencies>
         <dependency>

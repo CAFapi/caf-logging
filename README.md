@@ -1,30 +1,34 @@
-# caf-logging  
+# CAF Logging
+## Logback Configuration JAR
+This project configures Logback to meet the CAF Logging Standard.
 
-This repository provides the logging configuration needed to force logback to log output in the pattern shown in the example below.  
+- The log level is controllable via an environment variable.  
+    - The `CAF_LOG_LEVEL` environment variable can be used to configure the required volume of logging.  
+    - By default `INFO`-level logging is used.
 
-**Pattern:**  
-```  
- [(Time) (Thread Name) (Log Level) (Tenant Id (padded to 30 characters)) (CAF Correlation Id (first 8 characters only)) ] (Logger) (Log Message)  
-```  
+- A consistent log message format is used.  
+    - The header information is in square brackets.
+    - Fixed size columns are used so that messages align vertically.
+    - Missing or inapplicable header fields are replaced with a dash.
 
-**Example:**
-```  
-[10:50:25.465 http-nio-8080-exec-9 DEBUG acme-corp                      -       ] com.github.example.Logger Example Log Message  
-```
+#### Pattern:
+    [(Time) (Thread Name) (Log Level) (Tenant Id) (Correlation Id)] (Logger) (Log Message)  
 
-To Enable this configuration to log the tenant or CAF correlation id's the service using this configuration must add the tenant id and the correlation id to the Mapped Diagnostic Context using the following commands from with the Java code.  
-```  
-MDC.put("tenantId", acme-corp);  
-MDC.put("correlationId", 6afb775c-bf4d-11e9-9cb5-2a2ae2dbcce4);  
-```  
+#### Example:
+    [10:50:25.465 http-nio-8080-exec-9 DEBUG acme-corp                      -       ] com.github.example.Logger Example Log Message
 
-If tenant or CAF correlation id are not supplied the logger will substitute them with a `-` and pad the rest of their character allotment with spaces. The logger will also pad any tenant id shorter than 30 characters to the 30 character limit, this is to aide readability of the logs by aligning the log statements.  
+To log the tenant and correlation ids the service using this configuration must use SLF4J's [MDC](https://www.slf4j.org/manual.html#mdc).  
+Example commands:
 
-To consume this library add the maven dependency to your project.  
-```  
-  <dependency>  
-    <groupId>com.github.cafapi</groupId>  
-    <artifactId>caf-logging</artifactId>  
-    <version>1.0.0-SNAPSHOT</version>  
-  </dependency>  
-```  
+    MDC.put("tenantId", "acme-corp");
+    MDC.put("correlationId", "6afb775c-bf4d-11e9-9cb5-2a2ae2dbcce4");
+
+If the tenant or correlation id are not supplied the logger will substitute them with a dash and pad the rest of their character allotment with spaces.  The logger will also pad any tenant id shorter than 30 characters to the 30 character limit.  This is to aide readability of the logs by aligning the log statements.
+
+To use this logging configuration simply add the project as a runtime-scope dependency:
+
+    <dependency>
+        <groupId>com.github.cafapi</groupId>
+        <artifactId>caf-logging</artifactId>
+        <scope>runtime</scope>
+    </dependency>
