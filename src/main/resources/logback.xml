@@ -17,8 +17,8 @@
 -->
 <configuration>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>[%d{HH:mm:ss.SSS} [%thread] %logger{36} %-5level %tenantId{32} %correlationId{32}] - %msg%n</pattern>
+        <encoder> 
+            <pattern>[%.-12d{HH:mm:ss.SSS} %thread %-5level %-30.30mdc{tenantId:--} %-8.8mdc{correlationId:--}] %logger{36} %msg%n</pattern>
         </encoder>
     </appender>
 
