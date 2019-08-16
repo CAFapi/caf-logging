@@ -17,10 +17,17 @@ package com.github.cafapi.logging;
 
 import ch.qos.logback.classic.spi.LoggingEvent;
 import ch.qos.logback.core.ConsoleAppender;
+import com.hpe.caf.util.processidentifier.ProcessIdentifier;
+import java.util.Locale;
 
 public final class CAFConsoleAppender extends ConsoleAppender<LoggingEvent>
 {
+    private static final String PROCESS_ID;
     private final ThreadLocal<String> threadIds;
+
+    static {
+        PROCESS_ID = ProcessIdentifier.getProcessId().toString().substring(0, 3);
+    }
 
     public CAFConsoleAppender()
     {
@@ -37,6 +44,6 @@ public final class CAFConsoleAppender extends ConsoleAppender<LoggingEvent>
     private static String getThreadName()
     {
         final long threadId = Thread.currentThread().getId();
-        return String.format(Locale.ENGLISH, "#%03d", threadId);
+        return String.format(Locale.ENGLISH, "#%s.%03d", PROCESS_ID, threadId);
     }
 }

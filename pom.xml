@@ -80,6 +80,11 @@
             <artifactId>logback-core</artifactId>
             <version>${logbackVersion}</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.cafapi.util</groupId>
+            <artifactId>util-process-identifier</artifactId>
+            <version>1.16.0-118</version>
+        </dependency>
     </dependencies>
 
 </project>
