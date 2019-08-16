@@ -18,7 +18,9 @@
 <configuration>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder> 
-            <pattern>[%.-12d{HH:mm:ss.SSS} %thread %-5level %-30.30mdc{tenantId:--} %-8.8mdc{correlationId:--}] %logger{36} %msg%n</pattern>
+            <pattern>
+                [%.-12d{HH:mm:ss.SSS} %thread %-5level %-30.30mdc{tenantId:--} %-8.8mdc{correlationId:--}] %logger{36} %msg%n
+            </pattern>
             <charset>UTF-8</charset>
         </encoder>
     </appender>
