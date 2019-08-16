@@ -24,7 +24,7 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonGenerator.Feature;
 import java.io.IOException;
-import org.apache.commons.text.TextStringBuilder;
+import org.apache.commons.text.StrBuilder;
 
 public final class MaybeJsonMessageConverter extends ThrowableHandlingConverter
 {
@@ -59,7 +59,7 @@ public final class MaybeJsonMessageConverter extends ThrowableHandlingConverter
         if (throwableProxy == null && isMessageSafeToLog(message)) {
             return message;
         } else {
-            final TextStringBuilder sb = new TextStringBuilder();
+            final StrBuilder sb = new StrBuilder();
             try (final JsonGenerator jsonBuilder = jsonFactory.createGenerator(sb.asWriter())) {
                 jsonBuilder.writeStartObject();
                 jsonBuilder.writeStringField("message", message);
