@@ -37,6 +37,6 @@ public final class CAFConsoleAppender extends ConsoleAppender<LoggingEvent>
     private static String getThreadName()
     {
         final long threadId = Thread.currentThread().getId();
-        return String.format("#%03d", threadId);
+        return String.format(Locale.ENGLISH, "#%03d", threadId);
     }
 }
