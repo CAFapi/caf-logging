@@ -12,10 +12,10 @@ This project configures Logback to meet the CAF Logging Standard.
     - Missing or inapplicable header fields are replaced with a dash.
 
 #### Pattern:
-    [(Time) #(Process Id).(Thread Id) (Log Level) (Tenant Id) (Correlation Id)] (Logger) (Log Message)  
+    [(UTC Time) #(Process Id).(Thread Id) (Log Level) (Tenant Id) (Correlation Id)] (Logger): (Log Message)
 
 #### Example:
-    [10:50:25.465 #bff.009 DEBUG acme-corp    -   ] com.github.example.Logger Example Log Message
+    [10:50:25.465Z #bff.009 DEBUG acme-corp    -   ] com.github.example.Logger: Example Log Message
 
 To log the tenant and correlation ids the service using this configuration must use SLF4J's [MDC](https://www.slf4j.org/manual.html#mdc).  
 Example commands:
@@ -23,7 +23,7 @@ Example commands:
     MDC.put("tenantId", "acme-corp");
     MDC.put("correlationId", "6afb775c-bf4d-11e9-9cb5-2a2ae2dbcce4");
 
-If the tenant or correlation id are not supplied the logger will substitute them with a dash and pad the rest of their character allotment with spaces.  The logger will also pad any tenant id shorter than 30 characters to the 30 character limit.  This is to aide readability of the logs by aligning the log statements.
+If the tenant or correlation id are not supplied the logger will substitute them with a dash and pad the rest of their character allotment with spaces.  The logger will also pad any tenant id shorter than 12 characters to the 12 character limit.  This is to aide readability of the logs by aligning the log statements.
 
 To use this logging configuration simply add the project as a runtime-scope dependency:
 
