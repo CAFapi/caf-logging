@@ -11,6 +11,11 @@ This project configures Logback to meet the CAF Logging Standard.
     - Fixed size columns are used so that messages align vertically.
     - Missing or inapplicable header fields are replaced with a dash.
 
+- Log Injection attacks are prevented.  
+    - Any unsafe characters found in the Tenant Id, Correlation Id, or Logger are removed.
+    - The log message is JSON-encoded if it contains any control characters (including newlines) or any non-ASCII characters.
+    - Exception stack traces are JSON-encoded so that they do not span multiple lines.
+
 #### Pattern:
     [(UTC Time) #(Process Id).(Thread Id) (Log Level) (Tenant Id) (Correlation Id)] (Logger): (Log Message)
 
