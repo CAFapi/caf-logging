@@ -15,7 +15,7 @@ This project configures Logback to meet the CAF Logging Standard.
     [(Time) (Thread Name) (Log Level) (Tenant Id) (Correlation Id)] (Logger) (Log Message)  
 
 #### Example:
-    [10:50:25.465 http-nio-8080-exec-9 DEBUG acme-corp                      -       ] com.github.example.Logger Example Log Message
+    [10:50:25.465 http-nio-8080-exec-9 DEBUG acme-corp    -   ] com.github.example.Logger Example Log Message
 
 To log the tenant and correlation ids the service using this configuration must use SLF4J's [MDC](https://www.slf4j.org/manual.html#mdc).  
 Example commands:
