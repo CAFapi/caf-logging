@@ -66,14 +66,24 @@
         <copyrightYear>2019</copyrightYear>
         <copyrightNotice>Copyright ${copyrightYear} Micro Focus or one of its affiliates.</copyrightNotice>
         <enforceCorrectDependencies>true</enforceCorrectDependencies>
+        <logbackVersion>1.2.3</logbackVersion>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
-            <scope>runtime</scope>
+            <version>${logbackVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logbackVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.cafapi.util</groupId>
+            <artifactId>util-process-identifier</artifactId>
+            <version>1.16.0-118</version>
         </dependency>
     </dependencies>
 

@@ -16,7 +16,7 @@
 
 -->
 <configuration>
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="STDOUT" class="com.github.cafapi.logging.CAFConsoleAppender">
         <encoder> 
             <pattern>
                 [%.-12d{HH:mm:ss.SSS} %thread %-5level %-12.-12mdc{tenantId:--} %-4.-4mdc{correlationId:--}] %logger{36} %msg%n
