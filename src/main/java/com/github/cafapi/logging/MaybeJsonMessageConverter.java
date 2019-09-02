@@ -106,6 +106,7 @@ public final class MaybeJsonMessageConverter extends ThrowableHandlingConverter
     {
         public UnexpectedIOException(final IOException ex)
         {
+            super(ex);
         }
     }
 }
