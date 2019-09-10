@@ -30,6 +30,7 @@
         </encoder>
     </appender>
 
+    <logger name="org.hibernate.engine" level="${CAF_HIBERNATE_LOG_LEVEL:-ERROR}" />
     <root level="${CAF_LOG_LEVEL:-INFO}">
         <appender-ref ref="STDOUT" />
     </root>
