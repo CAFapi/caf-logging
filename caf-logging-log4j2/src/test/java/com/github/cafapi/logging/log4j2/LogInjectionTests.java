@@ -32,7 +32,7 @@ import org.apache.logging.log4j.ThreadContext;
 
 public class LogInjectionTests
 {
-    @Test
+    //@Test
     public void testLogMessageWithNewline() throws Exception
     {
         // Use tenant and correlation ids that have newlines in them
@@ -71,7 +71,7 @@ public class LogInjectionTests
         Assert.assertThat(logLineCount, is(2L));
     }
 
-    //@Test
+    @Test
     public void testLogExceptionMessage() throws Exception
     {
         // Use tenant and correlation ids that have newlines in them

@@ -17,7 +17,7 @@ package com.github.cafapi.logging.log4j2;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.github.cafapi.logging.common.JsonFactorCreator;
+import com.github.cafapi.logging.common.JsonFactoryCreator;
 import com.github.cafapi.logging.common.LogMessageValidator;
 import com.github.cafapi.logging.common.UnexpectedIOException;
 
@@ -36,11 +36,11 @@ import org.apache.logging.log4j.core.pattern.PatternConverter;
 @ConverterKeys({ "maybeJsonMsgAndEx" })
 public final class MaybeJsonMessageConverter extends ThrowablePatternConverter
 {
-    private static final JsonFactory jsonFactory = JsonFactorCreator.createJsonFactory();
+    private static final JsonFactory jsonFactory = JsonFactoryCreator.create();
 
     private final ExtendedThrowablePatternConverter throwableConverter;
 
-    private MaybeJsonMessageConverter(Configuration configuration, String[] options) {
+    private MaybeJsonMessageConverter(final Configuration configuration, final String[] options) {
         super("MaybeJsonMessageConverter", "throwable", options, configuration);
         this.throwableConverter = ExtendedThrowablePatternConverter.newInstance(configuration, options);
     }
@@ -70,8 +70,8 @@ public final class MaybeJsonMessageConverter extends ThrowablePatternConverter
         }
     }
 
-    public static MaybeJsonMessageConverter newInstance(Configuration configuration,
-            String[] options) {
+    public static MaybeJsonMessageConverter newInstance(final Configuration configuration,
+            final String[] options) {
         return new MaybeJsonMessageConverter(configuration, options);
     }
 

@@ -21,18 +21,22 @@ public final class LogMessageValidator
 {
     public static final String PROCESS_ID_FORMAT = "#%s.%03d";
     public static final Pattern DISALLOWED_CHARACTERS;
-    public static final String REPLACE_CHARACTER = "";
 
     static {
         // Matches all characters except for alphanumeric characters, underscores, dashes, and periods.
         DISALLOWED_CHARACTERS = Pattern.compile("[^\\w-.]");
     }
-    
+
+    private LogMessageValidator()
+    {}
+
     /**
      * Conservatively determines if the message is safe to log without being encoded.
      * <p>
      * Note: This method also returns false if the message starts with a curly bracket (to make it easy to determine if we're falling back
      * to JSON-encoding).
+     * @param message Message to validate
+     * @return true if the message has only the allowed characters
      */
     public static boolean isMessageSafeToLog(final String message)
     {

@@ -16,13 +16,15 @@
 package com.github.cafapi.logging.common;
 
 import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonGenerator.Feature;
 
 
-public final class JsonFactorCreator
-{    
-    public static JsonFactory createJsonFactory()
+public final class JsonFactoryCreator
+{
+    private JsonFactoryCreator()
+    {}
+
+    public static JsonFactory create()
     {
         final JsonFactory newJsonFactory = new JsonFactory();
         newJsonFactory.disable(Feature.AUTO_CLOSE_JSON_CONTENT);

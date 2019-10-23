@@ -60,6 +60,6 @@ public final class SanitizeConverter extends LogEventPatternConverter
         for (final PatternFormatter formatter : formatters) {
             formatter.format(event, buf);
         }
-        toAppendTo.append(LogMessageValidator.DISALLOWED_CHARACTERS.matcher(buf.toString()).replaceAll(LogMessageValidator.REPLACE_CHARACTER));
+        toAppendTo.append(LogMessageValidator.DISALLOWED_CHARACTERS.matcher(buf.toString()).replaceAll(""));
     }
 }

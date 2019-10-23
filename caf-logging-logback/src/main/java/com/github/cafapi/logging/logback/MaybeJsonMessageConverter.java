@@ -23,7 +23,7 @@ import ch.qos.logback.classic.spi.IThrowableProxy;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.github.cafapi.logging.common.UnexpectedIOException;
-import com.github.cafapi.logging.common.JsonFactorCreator;
+import com.github.cafapi.logging.common.JsonFactoryCreator;
 import com.github.cafapi.logging.common.LogMessageValidator;
 
 import java.io.IOException;
@@ -31,7 +31,7 @@ import org.apache.commons.text.StrBuilder;
 
 public final class MaybeJsonMessageConverter extends ThrowableHandlingConverter
 {
-    private static final JsonFactory jsonFactory = JsonFactorCreator.createJsonFactory();
+    private static final JsonFactory jsonFactory = JsonFactoryCreator.create();
     private final ClassicConverter throwableConverter;
 
     public MaybeJsonMessageConverter()
