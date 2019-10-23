@@ -15,9 +15,7 @@
  */
 package com.github.cafapi.logging.log4j2;
 
-import com.github.cafapi.logging.common.LogMessageValidator;
-import com.hpe.caf.util.processidentifier.ProcessIdentifier;
-import java.util.Locale;
+import com.github.cafapi.logging.common.ProcessAndThreadIdProvider;
 
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
@@ -30,22 +28,8 @@ import org.apache.logging.log4j.core.pattern.PatternConverter;
 public final class ProcessAndThreadIdPatternConverter extends LogEventPatternConverter
 {
 
-    private static final String PROCESS_ID;
-    private final ThreadLocal<String> threadIds;
-
-    static {
-        PROCESS_ID = ProcessIdentifier.getProcessId().toString().substring(0, 3);
-    }
-
     private ProcessAndThreadIdPatternConverter() {
         super("ProcessAndThreadIdPatternConverter", "aProcessId");
-        this.threadIds = ThreadLocal.withInitial(ProcessAndThreadIdPatternConverter::getThreadName);
-    }
-
-    private static String getThreadName()
-    {
-        final long threadId = Thread.currentThread().getId();
-        return String.format(Locale.ENGLISH, LogMessageValidator.PROCESS_ID_FORMAT, PROCESS_ID, threadId);
     }
 
     public static ProcessAndThreadIdPatternConverter newInstance(final String[] options) {
@@ -54,6 +38,6 @@ public final class ProcessAndThreadIdPatternConverter extends LogEventPatternCon
 
     @Override
     public void format(final LogEvent event, final StringBuilder buffer) {
-        buffer.append(threadIds.get());
+        buffer.append(ProcessAndThreadIdProvider.getId());
     }
 }

@@ -19,7 +19,6 @@ import java.util.regex.Pattern;
 
 public final class LogMessageValidator
 {
-    public static final String PROCESS_ID_FORMAT = "#%s.%03d";
     private static final Pattern DISALLOWED_CHARACTERS;
 
     static {

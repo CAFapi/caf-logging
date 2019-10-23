@@ -18,34 +18,20 @@ package com.github.cafapi.logging.logback;
 import ch.qos.logback.classic.spi.LoggingEvent;
 import ch.qos.logback.core.ConsoleAppender;
 
-import com.github.cafapi.logging.common.LogMessageValidator;
-import com.hpe.caf.util.processidentifier.ProcessIdentifier;
-import java.util.Locale;
+import com.github.cafapi.logging.common.ProcessAndThreadIdProvider;
 
 public final class CAFConsoleAppender extends ConsoleAppender<LoggingEvent>
 {
-    private static final String PROCESS_ID;
-    private final ThreadLocal<String> threadIds;
-
-    static {
-        PROCESS_ID = ProcessIdentifier.getProcessId().toString().substring(0, 3);
-    }
 
     public CAFConsoleAppender()
     {
-        this.threadIds = ThreadLocal.withInitial(CAFConsoleAppender::getThreadName);
     }
 
     @Override
     protected void subAppend(final LoggingEvent event)
     {
-        event.setThreadName(threadIds.get());
+        event.setThreadName(ProcessAndThreadIdProvider.getId());
         super.subAppend(event);
     }
 
-    private static String getThreadName()
-    {
-        final long threadId = Thread.currentThread().getId();
-        return String.format(Locale.ENGLISH, LogMessageValidator.PROCESS_ID_FORMAT, PROCESS_ID, threadId);
-    }
 }

@@ -34,6 +34,10 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.cafapi.util</groupId>
+            <artifactId>util-process-identifier</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
