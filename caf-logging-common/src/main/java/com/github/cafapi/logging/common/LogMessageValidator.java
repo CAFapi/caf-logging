@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 public final class LogMessageValidator
 {
     public static final String PROCESS_ID_FORMAT = "#%s.%03d";
-    public static final Pattern DISALLOWED_CHARACTERS;
+    private static final Pattern DISALLOWED_CHARACTERS;
 
     static {
         // Matches all characters except for alphanumeric characters, underscores, dashes, and periods.
@@ -28,7 +28,8 @@ public final class LogMessageValidator
     }
 
     private LogMessageValidator()
-    {}
+    {
+    }
 
     /**
      * Conservatively determines if the message is safe to log without being encoded.
@@ -47,5 +48,10 @@ public final class LogMessageValidator
         } else {
             return message.chars().allMatch(c -> c >= 0x20 && c < 0x7F);
         }
+    }
+
+    public static String sanitizeMessage(final String message)
+    {
+        return LogMessageValidator.DISALLOWED_CHARACTERS.matcher(message).replaceAll("");
     }
 }

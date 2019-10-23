@@ -25,6 +25,6 @@ public final class SanitizeConverter<E> extends CompositeConverter<E>
     @Override
     protected String transform(final E event, final String in)
     {
-        return LogMessageValidator.DISALLOWED_CHARACTERS.matcher(in).replaceAll("");
+        return LogMessageValidator.sanitizeMessage(in);
     }
 }

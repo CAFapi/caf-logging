@@ -22,7 +22,8 @@ import com.fasterxml.jackson.core.JsonGenerator.Feature;
 public final class JsonFactoryCreator
 {
     private JsonFactoryCreator()
-    {}
+    {
+    }
 
     public static JsonFactory create()
     {
