@@ -29,8 +29,8 @@ import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
 import org.apache.logging.log4j.core.impl.ThrowableProxy;
 import org.apache.logging.log4j.core.pattern.ConverterKeys;
-import org.apache.logging.log4j.core.pattern.ExtendedThrowablePatternConverter;
 import org.apache.logging.log4j.core.pattern.PatternConverter;
+import org.apache.logging.log4j.core.pattern.RootThrowablePatternConverter;
 
 @Plugin(name = "MaybeJsonMessageConverter", category = PatternConverter.CATEGORY)
 @ConverterKeys({ "maybeJsonMsgAndEx" })
@@ -38,11 +38,11 @@ public final class MaybeJsonMessageConverter extends ThrowablePatternConverter
 {
     private static final JsonFactory jsonFactory = JsonFactoryCreator.create();
 
-    private final ExtendedThrowablePatternConverter throwableConverter;
+    private final RootThrowablePatternConverter throwableConverter;
 
     private MaybeJsonMessageConverter(final Configuration configuration, final String[] options) {
         super("MaybeJsonMessageConverter", "throwable", options, configuration);
-        this.throwableConverter = ExtendedThrowablePatternConverter.newInstance(configuration, options);
+        this.throwableConverter = RootThrowablePatternConverter.newInstance(configuration, options);
     }
 
     @Override
