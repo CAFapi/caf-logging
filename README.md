@@ -1,6 +1,5 @@
 # CAF Logging
-## Logback Configuration JAR
-This project configures Logback to meet the CAF Logging Standard.
+This project configures Logback and Log4j2 to meet the CAF Logging Standard.
 
 - The log level is controllable via an environment variable.  
     - The `CAF_LOG_LEVEL` environment variable can be used to configure the required volume of logging.  
@@ -30,10 +29,18 @@ Example commands:
 
 If the tenant or correlation id are not supplied the logger will substitute them with a dash and pad the rest of their character allotment with spaces.  The logger will also pad any tenant id shorter than 12 characters to the 12 character limit.  This is to aide readability of the logs by aligning the log statements.
 
-To use this logging configuration simply add the project as a runtime-scope dependency:
+To use this logging configuration simply add the appropriate project as a runtime-scope dependency, either:
 
     <dependency>
-        <groupId>com.github.cafapi</groupId>
-        <artifactId>caf-logging</artifactId>
+        <groupId>com.github.cafapi.logging</groupId>
+        <artifactId>caf-logging-logback</artifactId>
+        <scope>runtime</scope>
+    </dependency>
+
+or
+
+    <dependency>
+        <groupId>com.github.cafapi.logging</groupId>
+        <artifactId>caf-logging-log4j2</artifactId>
         <scope>runtime</scope>
     </dependency>
