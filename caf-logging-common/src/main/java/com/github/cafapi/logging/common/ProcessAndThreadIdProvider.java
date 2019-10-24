@@ -21,7 +21,6 @@ import java.util.Locale;
 public final class ProcessAndThreadIdProvider
 {
 
-    private static final String PROCESS_ID_FORMAT = "#%s.%03d";
     private static final String PROCESS_ID;
     private static final ThreadLocal<String> threadIds;
 
@@ -37,7 +36,7 @@ public final class ProcessAndThreadIdProvider
     private static String getThreadName()
     {
         final long threadId = Thread.currentThread().getId();
-        return String.format(Locale.ENGLISH, ProcessAndThreadIdProvider.PROCESS_ID_FORMAT, PROCESS_ID, threadId);
+        return String.format(Locale.ENGLISH, "#%s.%03d", PROCESS_ID, threadId);
     }
 
     public static String getId() {
