@@ -44,3 +44,15 @@ or
         <artifactId>caf-logging-log4j2</artifactId>
         <scope>runtime</scope>
     </dependency>
+
+The [logback configuration can be extended](http://logback.qos.ch/manual/configuration.html#fileInclusion) by including a file which must called **includedLogback.xml** in the classpath. This file must have its elements nested inside an &lt;included&gt; element.
+Sample content of "includedLogback.xml" to include more loggers:
+
+```
+<included>
+    <logger name="org.hibernate"
+            level="${HIBERNATE_LOG_LEVEL:-${CAF_LOG_LEVEL:-INFO}}" />
+    <logger name="org.elasticsearch.action.search"
+            level="${ES_LOG_LEVEL:-${CAF_LOG_LEVEL:-INFO}}" />
+</included>
+```
