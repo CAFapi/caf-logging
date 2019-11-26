@@ -67,6 +67,7 @@
         <module>caf-logging-common</module>
         <module>caf-logging-log4j2</module>
         <module>caf-logging-logback</module>
+        <module>caf-logging-logback-tomcat</module>
     </modules>
 
     <properties>
@@ -89,6 +90,16 @@
                 <groupId>com.github.cafapi.logging</groupId>
                 <artifactId>caf-logging-common</artifactId>
                 <version>1.2.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.cafapi.logging</groupId>
+                <artifactId>caf-logging-logback</artifactId>
+                <version>1.2.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-access</artifactId>
+                <version>${logbackVersion}</version>
             </dependency>
             <dependency>
                 <groupId>ch.qos.logback</groupId>
