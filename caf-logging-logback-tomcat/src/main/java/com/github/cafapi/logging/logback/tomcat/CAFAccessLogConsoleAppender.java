@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Micro Focus or one of its affiliates.
+ * Copyright 2019-2020 Micro Focus or one of its affiliates.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,13 +29,15 @@ public final class CAFAccessLogConsoleAppender extends ConsoleAppender<AccessEve
     @Override
     protected void subAppend(final AccessEvent event)
     {
-        final StringBuilder logMsgBuilder = new StringBuilder(ProcessAndThreadIdProvider.getId());
+        final StringBuilder logMsgBuilder = new StringBuilder();
+        logMsgBuilder.append(ProcessAndThreadIdProvider.getId());
+        logMsgBuilder.append(" ");
         if(event.getStatusCode() >= 400 && event.getStatusCode() <=499){
-            logMsgBuilder.append(" ").append("WARN ");
+            logMsgBuilder.append("WARN ");
         }else if(event.getStatusCode() >= 500 && event.getStatusCode() <=599){
-            logMsgBuilder.append(" ").append("ERROR");
+            logMsgBuilder.append("ERROR");
         }else{
-            logMsgBuilder.append(" ").append("INFO ");
+            logMsgBuilder.append("INFO ");
         }
         event.setThreadName(logMsgBuilder.toString());
         super.subAppend(event);
