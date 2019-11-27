@@ -15,22 +15,22 @@
  */
 package com.github.cafapi.logging.logback.tomcat;
 
-import ch.qos.logback.access.spi.AccessEvent;
-import ch.qos.logback.core.ConsoleAppender;
+import ch.qos.logback.access.pattern.AccessConverter;
+import ch.qos.logback.access.spi.IAccessEvent;
 
-import com.github.cafapi.logging.common.ProcessAndThreadIdProvider;
-
-public final class CAFAccessLogConsoleAppender extends ConsoleAppender<AccessEvent>
+public class CAFAccessLogLevelConverter extends AccessConverter
 {
-    public CAFAccessLogConsoleAppender()
-    {
-    }
-
     @Override
-    protected void subAppend(final AccessEvent event)
+    public String convert(IAccessEvent event)
     {
-        event.setThreadName(ProcessAndThreadIdProvider.getId());
-        super.subAppend(event);
+        final StringBuilder logLevelBuilder = new StringBuilder();
+        if(event.getStatusCode() >= 400 && event.getStatusCode() <=499){
+            logLevelBuilder.append("WARN");
+        }else if(event.getStatusCode() >= 500 && event.getStatusCode() <=599){
+            logLevelBuilder.append("ERROR");
+        }else{
+            logLevelBuilder.append("INFO");
+        }
+        return logLevelBuilder.toString();
     }
-    
 }
