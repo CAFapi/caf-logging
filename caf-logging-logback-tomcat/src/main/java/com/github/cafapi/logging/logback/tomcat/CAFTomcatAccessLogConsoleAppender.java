@@ -15,17 +15,22 @@
  */
 package com.github.cafapi.logging.logback.tomcat;
 
-import ch.qos.logback.access.PatternLayoutEncoder;
+import ch.qos.logback.access.spi.AccessEvent;
+import ch.qos.logback.core.ConsoleAppender;
 
-public class CAFAccessLogPatternLayoutEncoder extends PatternLayoutEncoder {
+import com.github.cafapi.logging.common.ProcessAndThreadIdProvider;
+
+public final class CAFTomcatAccessLogConsoleAppender extends ConsoleAppender<AccessEvent>
+{
+    public CAFTomcatAccessLogConsoleAppender()
+    {
+    }
 
     @Override
-    public void start() {
-        final CAFAccessLogPatternLayout cafAccessLogPatternLayout  = new CAFAccessLogPatternLayout();
-        cafAccessLogPatternLayout.setContext(context);
-        cafAccessLogPatternLayout.setPattern(getPattern());
-        cafAccessLogPatternLayout.start();
-        this.layout = cafAccessLogPatternLayout;
-        super.start();
+    protected void subAppend(final AccessEvent event)
+    {
+        event.setThreadName(ProcessAndThreadIdProvider.getId());
+        super.subAppend(event);
     }
+    
 }

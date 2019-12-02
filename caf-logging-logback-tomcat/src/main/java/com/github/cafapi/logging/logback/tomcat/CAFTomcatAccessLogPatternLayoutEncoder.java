@@ -15,15 +15,17 @@
  */
 package com.github.cafapi.logging.logback.tomcat;
 
-import ch.qos.logback.access.PatternLayout;
-import java.util.Map;
+import ch.qos.logback.access.PatternLayoutEncoder;
 
-public final class CAFAccessLogPatternLayout<E> extends PatternLayout
-{
+public class CAFTomcatAccessLogPatternLayoutEncoder extends PatternLayoutEncoder {
+
     @Override
-    public Map<String, String> getDefaultConverterMap()
-    {
-        defaultConverterMap.put("loglevel", CAFAccessLogLevelConverter.class.getName());
-        return defaultConverterMap;
+    public void start() {
+        final CAFTomcatAccessLogPatternLayout cafAccessLogPatternLayout  = new CAFTomcatAccessLogPatternLayout();
+        cafAccessLogPatternLayout.setContext(context);
+        cafAccessLogPatternLayout.setPattern(getPattern());
+        cafAccessLogPatternLayout.start();
+        this.layout = cafAccessLogPatternLayout;
+        super.start();
     }
 }

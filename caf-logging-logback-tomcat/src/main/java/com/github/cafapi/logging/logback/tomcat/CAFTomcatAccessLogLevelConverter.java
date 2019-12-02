@@ -18,7 +18,7 @@ package com.github.cafapi.logging.logback.tomcat;
 import ch.qos.logback.access.pattern.AccessConverter;
 import ch.qos.logback.access.spi.IAccessEvent;
 
-public class CAFAccessLogLevelConverter extends AccessConverter
+public class CAFTomcatAccessLogLevelConverter extends AccessConverter
 {
     @Override
     public String convert(final IAccessEvent event)

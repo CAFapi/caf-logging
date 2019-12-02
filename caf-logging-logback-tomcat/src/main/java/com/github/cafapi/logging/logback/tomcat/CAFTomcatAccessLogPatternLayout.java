@@ -15,22 +15,15 @@
  */
 package com.github.cafapi.logging.logback.tomcat;
 
-import ch.qos.logback.access.spi.AccessEvent;
-import ch.qos.logback.core.ConsoleAppender;
+import ch.qos.logback.access.PatternLayout;
+import java.util.Map;
 
-import com.github.cafapi.logging.common.ProcessAndThreadIdProvider;
-
-public final class CAFAccessLogConsoleAppender extends ConsoleAppender<AccessEvent>
+public final class CAFTomcatAccessLogPatternLayout<E> extends PatternLayout
 {
-    public CAFAccessLogConsoleAppender()
-    {
-    }
-
     @Override
-    protected void subAppend(final AccessEvent event)
+    public Map<String, String> getDefaultConverterMap()
     {
-        event.setThreadName(ProcessAndThreadIdProvider.getId());
-        super.subAppend(event);
+        defaultConverterMap.put("loglevel", CAFTomcatAccessLogLevelConverter.class.getName());
+        return defaultConverterMap;
     }
-    
 }
