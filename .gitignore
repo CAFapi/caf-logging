@@ -1,0 +1,9 @@
+target/
+
+.settings
+.project
+.classpath
+caf-logging-logback-tomcat/src/main/java/com/github/cafapi/logging/logback/access/CAFAccessLogConsoleAppender.java
+caf-logging-logback-tomcat/src/main/java/com/github/cafapi/logging/logback/access/CAFAccessLogLevelConverter.java
+caf-logging-logback-tomcat/src/main/java/com/github/cafapi/logging/logback/access/CAFAccessLogPatternLayout.java
+caf-logging-logback-tomcat/src/main/java/com/github/cafapi/logging/logback/access/CAFAccessLogPatternLayoutEncoder.java
