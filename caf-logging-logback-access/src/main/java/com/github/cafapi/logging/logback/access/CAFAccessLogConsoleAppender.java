@@ -32,5 +32,4 @@ public final class CAFAccessLogConsoleAppender extends ConsoleAppender<AccessEve
         event.setThreadName(ProcessAndThreadIdProvider.getId());
         super.subAppend(event);
     }
-    
 }

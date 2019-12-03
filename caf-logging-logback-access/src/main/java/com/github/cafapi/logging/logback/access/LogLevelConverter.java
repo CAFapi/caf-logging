@@ -24,11 +24,11 @@ public final class LogLevelConverter extends AccessConverter
     public String convert(final IAccessEvent event)
     {
         final int statusCode = event.getStatusCode();
-        if(statusCode >= 400 && statusCode <=499){
+        if (statusCode >= 400 && statusCode <= 499) {
             return "WARN";
-        }else if(statusCode >= 500 && statusCode <=599){
+        } else if (statusCode >= 500 && statusCode <= 599) {
             return "ERROR";
-        }else{
+        } else {
             return "INFO";
         }
     }
