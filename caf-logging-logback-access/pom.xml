@@ -43,5 +43,4 @@
             <artifactId>logback-core</artifactId>
         </dependency>
     </dependencies>
-    <name>caf-logging-logback-access</name>
 </project>
