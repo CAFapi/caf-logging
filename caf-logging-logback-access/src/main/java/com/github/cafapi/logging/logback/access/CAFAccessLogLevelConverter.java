@@ -13,19 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.cafapi.logging.logback.tomcat;
+package com.github.cafapi.logging.logback.access;
 
 import ch.qos.logback.access.pattern.AccessConverter;
 import ch.qos.logback.access.spi.IAccessEvent;
 
-public class CAFTomcatAccessLogLevelConverter extends AccessConverter
+public class CAFAccessLogLevelConverter extends AccessConverter
 {
     @Override
     public String convert(final IAccessEvent event)
     {
-        if(event.getStatusCode() >= 400 && event.getStatusCode() <=499){
+        final int statusCode = event.getStatusCode();
+        if(statusCode >= 400 && statusCode <=499){
             return "WARN";
-        }else if(event.getStatusCode() >= 500 && event.getStatusCode() <=599){
+        }else if(statusCode >= 500 && statusCode <=599){
             return "ERROR";
         }else{
             return "INFO";

@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.cafapi.logging.logback.tomcat;
+package com.github.cafapi.logging.logback.access;
 
 import ch.qos.logback.access.spi.AccessEvent;
 import ch.qos.logback.core.ConsoleAppender;
 
 import com.github.cafapi.logging.common.ProcessAndThreadIdProvider;
 
-public final class CAFTomcatAccessLogConsoleAppender extends ConsoleAppender<AccessEvent>
+public final class CAFAccessLogConsoleAppender extends ConsoleAppender<AccessEvent>
 {
-    public CAFTomcatAccessLogConsoleAppender()
+    public CAFAccessLogConsoleAppender()
     {
     }
 
