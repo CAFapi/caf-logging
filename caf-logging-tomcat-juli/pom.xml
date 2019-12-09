@@ -44,11 +44,6 @@
             <artifactId>caf-logging-common</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.cafapi.logging</groupId>
-            <artifactId>caf-logging-tomcat-juli</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
             <scope>runtime</scope>
@@ -111,7 +106,6 @@
                                     <include>com.fasterxml.jackson.core:jackson-core</include>
                                     <include>com.github.cafapi.util:util-process-identifier</include>
                                     <include>com.github.cafapi.logging:caf-logging-common</include>
-                                    <include>com.github.cafapi.logging:caf-logging-tomcat-juli</include>
                                 </includes>
                             </artifactSet>
 
