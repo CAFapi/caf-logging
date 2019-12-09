@@ -68,12 +68,14 @@
         <module>caf-logging-log4j2</module>
         <module>caf-logging-logback</module>
         <module>caf-logging-logback-access</module>
+        <module>caf-logging-tomcat-juli</module>
     </modules>
 
     <properties>
         <copyrightYear>2020</copyrightYear>
         <enforceCorrectDependencies>true</enforceCorrectDependencies>
         <logbackVersion>1.2.3</logbackVersion>
+        <tomcatVersion>9.0.26</tomcatVersion>
     </properties>
 
     <dependencyManagement>
@@ -96,9 +98,9 @@
                 <version>1.2.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-access</artifactId>
-                <version>${logbackVersion}</version>
+                <groupId>com.github.cafapi.logging</groupId>
+                <artifactId>caf-logging-logback-access</artifactId>
+                <version>1.2.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>ch.qos.logback</groupId>
@@ -129,6 +131,21 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-text</artifactId>
                 <version>1.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-juli</artifactId>
+               <version>${tomcatVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.tomcat-slf4j-logback</groupId>
+                <artifactId>tomcat9-slf4j-logback</artifactId>
+                <version>${tomcatVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>1.7.25</version>
             </dependency>
 
             <!-- Test dependencies -->
