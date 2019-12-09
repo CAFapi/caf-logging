@@ -190,10 +190,10 @@
 
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
-<!--                                <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
                                     <resource>META-INF/LICENSE</resource>
-                                    <file>${project.basedir}/LICENSE</file>
-                                </transformer>-->
+                                    <file>${project.basedir}/LICENSE-tomcat9-slf4j-logback.txt</file>
+                                </transformer>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
                                     <resource>META-INF/LICENSE-logback.txt</resource>
                                     <file>${project.build.directory}/tomcat-slfj4-logback-config/assembly/LICENSE-logback.txt</file>
