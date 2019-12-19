@@ -67,7 +67,6 @@
         <module>caf-logging-common</module>
         <module>caf-logging-log4j2</module>
         <module>caf-logging-logback</module>
-        <module>caf-logging-logback-access</module>
     </modules>
 
     <properties>
