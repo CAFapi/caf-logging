@@ -13,25 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.cafapi.logging.logback;
+package com.github.cafapi.logging.logback.access;
 
-import ch.qos.logback.classic.spi.LoggingEvent;
-import ch.qos.logback.core.ConsoleAppender;
-
+import ch.qos.logback.access.pattern.AccessConverter;
+import ch.qos.logback.access.spi.IAccessEvent;
 import com.github.cafapi.logging.common.ProcessAndThreadIdProvider;
 
-public final class CAFConsoleAppender extends ConsoleAppender<LoggingEvent>
+public final class ProcessIdThreadIdIAccessEventConverter extends AccessConverter
 {
-
-    public CAFConsoleAppender()
-    {
-    }
-
     @Override
-    protected void subAppend(final LoggingEvent event)
+    public String convert(IAccessEvent event)
     {
-        event.setThreadName(ProcessAndThreadIdProvider.getId());
-        super.subAppend(event);
+         return ProcessAndThreadIdProvider.getId();
     }
-
 }
