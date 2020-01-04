@@ -24,6 +24,6 @@ public final class ProcessIdThreadIdLoggingEventConverter extends DynamicConvert
     @Override
     public String convert(LoggingEvent event)
     {
-         return ProcessAndThreadIdProvider.getId();
+        return ProcessAndThreadIdProvider.getId();
     }
 }

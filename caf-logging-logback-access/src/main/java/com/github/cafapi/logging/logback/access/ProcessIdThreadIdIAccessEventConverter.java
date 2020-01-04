@@ -24,6 +24,6 @@ public final class ProcessIdThreadIdIAccessEventConverter extends AccessConverte
     @Override
     public String convert(IAccessEvent event)
     {
-         return ProcessAndThreadIdProvider.getId();
+        return ProcessAndThreadIdProvider.getId();
     }
 }
