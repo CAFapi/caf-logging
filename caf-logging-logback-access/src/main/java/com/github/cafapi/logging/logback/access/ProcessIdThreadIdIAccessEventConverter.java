@@ -22,7 +22,7 @@ import com.github.cafapi.logging.common.ProcessAndThreadIdProvider;
 public final class ProcessIdThreadIdIAccessEventConverter extends AccessConverter
 {
     @Override
-    public String convert(IAccessEvent event)
+    public String convert(final IAccessEvent event)
     {
         return ProcessAndThreadIdProvider.getId();
     }
