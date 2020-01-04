@@ -17,7 +17,7 @@
 -->
 <configuration>
     <conversionRule conversionWord="threadName"
-                    converterClass="com.github.cafapi.logging.logback.ProcessIdThreadIdLoggingEventConverter" />
+                    converterClass="com.github.cafapi.logging.logback.ProcessAndThreadIdPatternConverter" />
     <conversionRule conversionWord="sanitize"
                     converterClass="com.github.cafapi.logging.logback.SanitizeConverter" />
     <conversionRule conversionWord="maybeJsonMsgAndEx"
