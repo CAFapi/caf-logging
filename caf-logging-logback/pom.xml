@@ -35,7 +35,7 @@
             <artifactId>caf-logging-logback-converters</artifactId>
             <scope>runtime</scope>
         </dependency>
-        
+
         <!-- Test dependencies -->
         <dependency>
             <groupId>junit</groupId>

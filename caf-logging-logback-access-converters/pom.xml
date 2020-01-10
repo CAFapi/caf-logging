@@ -39,4 +39,5 @@
             <artifactId>caf-logging-common</artifactId>
         </dependency>
     </dependencies>
+
 </project>
