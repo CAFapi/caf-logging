@@ -13,18 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.cafapi.logging.logback;
+package com.github.cafapi.logging.logback.converters;
 
-import ch.qos.logback.core.pattern.CompositeConverter;
+import ch.qos.logback.core.pattern.DynamicConverter;
+import com.github.cafapi.logging.common.ProcessAndThreadIdProvider;
 
-import com.github.cafapi.logging.common.LogMessageValidator;
-
-public final class SanitizeConverter<E> extends CompositeConverter<E>
+public final class ProcessAndThreadIdPatternConverter<E> extends DynamicConverter<E>
 {
-
     @Override
-    protected String transform(final E event, final String in)
+    public String convert(final E event)
     {
-        return LogMessageValidator.sanitizeMessage(in);
+        return ProcessAndThreadIdProvider.getId();
     }
 }

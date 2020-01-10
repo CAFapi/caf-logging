@@ -13,16 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.cafapi.logging.logback;
+package com.github.cafapi.logging.logback.access.converters;
 
-import ch.qos.logback.core.pattern.DynamicConverter;
-import com.github.cafapi.logging.common.ProcessAndThreadIdProvider;
+import ch.qos.logback.access.pattern.AccessConverter;
+import ch.qos.logback.access.spi.IAccessEvent;
 
-public final class ProcessAndThreadIdPatternConverter<E> extends DynamicConverter<E>
+public final class LogLevelConverter extends AccessConverter
 {
     @Override
-    public String convert(final E event)
+    public String convert(final IAccessEvent event)
     {
-        return ProcessAndThreadIdProvider.getId();
+        final int statusCode = event.getStatusCode();
+        if (statusCode >= 400 && statusCode <= 499) {
+            return "WARN";
+        } else if (statusCode >= 500 && statusCode <= 599) {
+            return "ERROR";
+        } else {
+            return "INFO";
+        }
     }
 }

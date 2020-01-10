@@ -13,23 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.cafapi.logging.logback.access;
+package com.github.cafapi.logging.logback.converters;
 
-import ch.qos.logback.access.pattern.AccessConverter;
-import ch.qos.logback.access.spi.IAccessEvent;
+import ch.qos.logback.core.pattern.CompositeConverter;
 
-public final class LogLevelConverter extends AccessConverter
+import com.github.cafapi.logging.common.LogMessageValidator;
+
+public final class SanitizeConverter<E> extends CompositeConverter<E>
 {
+
     @Override
-    public String convert(final IAccessEvent event)
+    protected String transform(final E event, final String in)
     {
-        final int statusCode = event.getStatusCode();
-        if (statusCode >= 400 && statusCode <= 499) {
-            return "WARN";
-        } else if (statusCode >= 500 && statusCode <= 599) {
-            return "ERROR";
-        } else {
-            return "INFO";
-        }
+        return LogMessageValidator.sanitizeMessage(in);
     }
 }
