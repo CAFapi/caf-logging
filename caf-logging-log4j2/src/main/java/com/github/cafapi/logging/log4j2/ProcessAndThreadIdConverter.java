@@ -22,18 +22,18 @@ import org.apache.logging.log4j.core.pattern.ConverterKeys;
 import org.apache.logging.log4j.core.pattern.LogEventPatternConverter;
 import org.apache.logging.log4j.core.pattern.PatternConverter;
 
-@Plugin(name = "ProcessAndThreadIdPatternConverter", category = PatternConverter.CATEGORY)
-@ConverterKeys({"aProcessId"})
-public final class ProcessAndThreadIdPatternConverter extends LogEventPatternConverter
+@Plugin(name = "ProcessAndThreadIdConverter", category = PatternConverter.CATEGORY)
+@ConverterKeys({"pidtid"})
+public final class ProcessAndThreadIdConverter extends LogEventPatternConverter
 {
-    private ProcessAndThreadIdPatternConverter()
+    private ProcessAndThreadIdConverter()
     {
-        super("ProcessAndThreadIdPatternConverter", "aProcessId");
+        super("ProcessAndThreadIdConverter", "pidtid");
     }
 
-    public static ProcessAndThreadIdPatternConverter newInstance(final String[] options)
+    public static ProcessAndThreadIdConverter newInstance(final String[] options)
     {
-        return new ProcessAndThreadIdPatternConverter();
+        return new ProcessAndThreadIdConverter();
     }
 
     @Override
