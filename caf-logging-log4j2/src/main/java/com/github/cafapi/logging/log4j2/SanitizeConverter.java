@@ -15,8 +15,8 @@
  */
 package com.github.cafapi.logging.log4j2;
 
+import com.github.cafapi.logging.common.LogMessageValidator;
 import java.util.List;
-
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
@@ -27,20 +27,20 @@ import org.apache.logging.log4j.core.pattern.PatternConverter;
 import org.apache.logging.log4j.core.pattern.PatternFormatter;
 import org.apache.logging.log4j.core.pattern.PatternParser;
 
-import com.github.cafapi.logging.common.LogMessageValidator;
-
 @Plugin(name = "SanitizeConverter", category = PatternConverter.CATEGORY)
-@ConverterKeys({ "sanitize" })
+@ConverterKeys({"sanitize"})
 public final class SanitizeConverter extends LogEventPatternConverter
 {
     private final List<PatternFormatter> formatters;
 
-    private SanitizeConverter(final List<PatternFormatter> formatters) {
+    private SanitizeConverter(final List<PatternFormatter> formatters)
+    {
         super("SanitizeConverter", "sanitize");
         this.formatters = formatters;
     }
 
-    public static SanitizeConverter newInstance(final Configuration config, final String[] options) {
+    public static SanitizeConverter newInstance(final Configuration config, final String[] options)
+    {
         if (options.length != 1) {
             LOGGER.error("Incorrect number of options on sanitize. Expected 1 received " + options.length);
             return null;
@@ -55,7 +55,8 @@ public final class SanitizeConverter extends LogEventPatternConverter
     }
 
     @Override
-    public void format(final LogEvent event, final StringBuilder toAppendTo) {
+    public void format(final LogEvent event, final StringBuilder toAppendTo)
+    {
         final StringBuilder buf = new StringBuilder();
         for (final PatternFormatter formatter : formatters) {
             formatter.format(event, buf);

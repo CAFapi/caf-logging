@@ -20,7 +20,6 @@ import java.util.Locale;
 
 public final class ProcessAndThreadIdProvider
 {
-
     private static final String PROCESS_ID;
     private static final ThreadLocal<String> threadIds;
 
@@ -39,7 +38,8 @@ public final class ProcessAndThreadIdProvider
         return String.format(Locale.ENGLISH, "#%s.%03d", PROCESS_ID, threadId);
     }
 
-    public static String getId() {
+    public static String getId()
+    {
         return threadIds.get();
     }
 }

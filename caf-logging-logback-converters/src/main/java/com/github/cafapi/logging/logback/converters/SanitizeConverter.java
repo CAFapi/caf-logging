@@ -16,12 +16,10 @@
 package com.github.cafapi.logging.logback.converters;
 
 import ch.qos.logback.core.pattern.CompositeConverter;
-
 import com.github.cafapi.logging.common.LogMessageValidator;
 
 public final class SanitizeConverter<E> extends CompositeConverter<E>
 {
-
     @Override
     protected String transform(final E event, final String in)
     {

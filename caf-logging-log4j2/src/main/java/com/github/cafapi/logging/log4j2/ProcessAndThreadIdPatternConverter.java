@@ -16,7 +16,6 @@
 package com.github.cafapi.logging.log4j2;
 
 import com.github.cafapi.logging.common.ProcessAndThreadIdProvider;
-
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
 import org.apache.logging.log4j.core.pattern.ConverterKeys;
@@ -24,20 +23,22 @@ import org.apache.logging.log4j.core.pattern.LogEventPatternConverter;
 import org.apache.logging.log4j.core.pattern.PatternConverter;
 
 @Plugin(name = "ProcessAndThreadIdPatternConverter", category = PatternConverter.CATEGORY)
-@ConverterKeys({ "aProcessId" })
+@ConverterKeys({"aProcessId"})
 public final class ProcessAndThreadIdPatternConverter extends LogEventPatternConverter
 {
-
-    private ProcessAndThreadIdPatternConverter() {
+    private ProcessAndThreadIdPatternConverter()
+    {
         super("ProcessAndThreadIdPatternConverter", "aProcessId");
     }
 
-    public static ProcessAndThreadIdPatternConverter newInstance(final String[] options) {
+    public static ProcessAndThreadIdPatternConverter newInstance(final String[] options)
+    {
         return new ProcessAndThreadIdPatternConverter();
     }
 
     @Override
-    public void format(final LogEvent event, final StringBuilder buffer) {
+    public void format(final LogEvent event, final StringBuilder buffer)
+    {
         buffer.append(ProcessAndThreadIdProvider.getId());
     }
 }

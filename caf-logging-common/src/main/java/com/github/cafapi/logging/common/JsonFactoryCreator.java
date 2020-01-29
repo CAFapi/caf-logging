@@ -18,7 +18,6 @@ package com.github.cafapi.logging.common;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator.Feature;
 
-
 public final class JsonFactoryCreator
 {
     private JsonFactoryCreator()

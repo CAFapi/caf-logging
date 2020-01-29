@@ -20,10 +20,8 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.github.cafapi.logging.common.JsonFactoryCreator;
 import com.github.cafapi.logging.common.LogMessageValidator;
 import com.github.cafapi.logging.common.UnexpectedIOException;
-
 import java.io.IOException;
 import org.apache.commons.text.StrBuilder;
-import org.apache.logging.log4j.core.pattern.ThrowablePatternConverter;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.plugins.Plugin;
@@ -31,22 +29,25 @@ import org.apache.logging.log4j.core.impl.ThrowableProxy;
 import org.apache.logging.log4j.core.pattern.ConverterKeys;
 import org.apache.logging.log4j.core.pattern.PatternConverter;
 import org.apache.logging.log4j.core.pattern.RootThrowablePatternConverter;
+import org.apache.logging.log4j.core.pattern.ThrowablePatternConverter;
 
 @Plugin(name = "MaybeJsonMessageConverter", category = PatternConverter.CATEGORY)
-@ConverterKeys({ "maybeJsonMsgAndEx" })
+@ConverterKeys({"maybeJsonMsgAndEx"})
 public final class MaybeJsonMessageConverter extends ThrowablePatternConverter
 {
     private static final JsonFactory jsonFactory = JsonFactoryCreator.create();
 
     private final RootThrowablePatternConverter throwableConverter;
 
-    private MaybeJsonMessageConverter(final Configuration configuration, final String[] options) {
+    private MaybeJsonMessageConverter(final Configuration configuration, final String[] options)
+    {
         super("MaybeJsonMessageConverter", "throwable", options, configuration);
         this.throwableConverter = RootThrowablePatternConverter.newInstance(configuration, options);
     }
 
     @Override
-    public void format(final LogEvent event, final StringBuilder buffer) {
+    public void format(final LogEvent event, final StringBuilder buffer)
+    {
         final ThrowableProxy throwableProxy = event.getThrownProxy();
         final String message = event.getMessage().getFormattedMessage();
 
@@ -70,9 +71,11 @@ public final class MaybeJsonMessageConverter extends ThrowablePatternConverter
         }
     }
 
-    public static MaybeJsonMessageConverter newInstance(final Configuration configuration,
-            final String[] options) {
+    public static MaybeJsonMessageConverter newInstance(
+        final Configuration configuration,
+        final String[] options
+    )
+    {
         return new MaybeJsonMessageConverter(configuration, options);
     }
-
 }

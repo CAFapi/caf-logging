@@ -35,6 +35,7 @@ public final class LogMessageValidator
      * <p>
      * Note: This method also returns false if the message starts with a curly bracket (to make it easy to determine if we're falling back
      * to JSON-encoding).
+     *
      * @param message Message to validate
      * @return true if the message has only the allowed characters
      */
