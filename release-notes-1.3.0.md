@@ -3,10 +3,7 @@
 ${version-number}
 
 #### New Features
-- None
+- **SCMOD-9303**: New OpenSUSE-based Maven image updated.
 
 #### Known Issues
 - None
-
-#### Others
-- **SCMOD-9303**: New OpenSUSE-based Maven image updated.
