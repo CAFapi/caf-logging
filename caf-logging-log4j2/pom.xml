@@ -24,7 +24,7 @@
     <parent>
         <groupId>com.github.cafapi.logging</groupId>
         <artifactId>caf-logging</artifactId>
-        <version>1.3.0-95</version>
+        <version>1.4.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>caf-logging-log4j2</artifactId>
