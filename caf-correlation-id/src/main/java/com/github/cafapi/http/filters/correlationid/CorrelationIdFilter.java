@@ -13,10 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.microfocus.http.filters.correlationid;
-
-import static com.microfocus.http.filters.correlationid.CorrelationIdConfigurationConstants.headerName;
-import static com.microfocus.http.filters.correlationid.CorrelationIdConfigurationConstants.mdcKey;
+package com.github.cafapi.http.filters.correlationid;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -43,9 +40,9 @@ public class CorrelationIdFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
-        String correlationId = Optional.ofNullable(req.getHeader(headerName)).orElseGet(() -> UUID.randomUUID().toString());
-        MDC.put(mdcKey, correlationId);
-        resp.addHeader(headerName, correlationId);
+        String correlationId = Optional.ofNullable(req.getHeader(CorrelationIdConfigurationConstants.headerName)).orElseGet(() -> UUID.randomUUID().toString());
+        MDC.put(CorrelationIdConfigurationConstants.mdcKey, correlationId);
+        resp.addHeader(CorrelationIdConfigurationConstants.headerName, correlationId);
         chain.doFilter(request, response);
     }
     

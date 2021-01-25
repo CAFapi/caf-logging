@@ -13,10 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.microfocus.http.filters.correlationid;
-
-import static com.microfocus.http.filters.correlationid.CorrelationIdConfigurationConstants.headerName;
-import static com.microfocus.http.filters.correlationid.CorrelationIdConfigurationConstants.mdcKey;
+package com.github.cafapi.http.filters.correlationid;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -32,8 +29,8 @@ public class CorrelationIdClientFilter implements ClientRequestFilter {
     
     @Override
     public void filter(ClientRequestContext requestContext) {
-        String correlationId = Optional.ofNullable(MDC.get(mdcKey)).orElseGet(() -> UUID.randomUUID().toString());
-        requestContext.getHeaders().add(headerName, correlationId);
+        String correlationId = Optional.ofNullable(MDC.get(CorrelationIdConfigurationConstants.mdcKey)).orElseGet(() -> UUID.randomUUID().toString());
+        requestContext.getHeaders().add(CorrelationIdConfigurationConstants.headerName, correlationId);
     }
     
 }
