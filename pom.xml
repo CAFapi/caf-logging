@@ -69,6 +69,7 @@
         <module>caf-logging-logback</module>
         <module>caf-logging-logback-converters</module>
         <module>caf-logging-logback-access-converters</module>
+        <module>caf-correlation-id</module>
     </modules>
 
     <properties>
@@ -79,6 +80,13 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.github.cafapi</groupId>
+                <artifactId>caf-dependency-management-bom</artifactId>
+                <version>2.0.0-268</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-bom</artifactId>
