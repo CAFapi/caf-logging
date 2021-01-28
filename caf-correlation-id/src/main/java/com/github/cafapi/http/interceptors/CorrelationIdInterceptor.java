@@ -18,11 +18,12 @@ package com.github.cafapi.http.interceptors;
 import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.headerName;
 import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.mdcKey;
 
+import java.util.Objects;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.MDC;
-import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -30,7 +31,7 @@ public final class CorrelationIdInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) {
         final String correlationId = request.getHeader(headerName);
-        if (!StringUtils.isEmpty(correlationId)) {
+        if (Objects.nonNull(correlationId) && !correlationId.isEmpty()) {
             MDC.put(mdcKey, correlationId);
         }
         return true;
