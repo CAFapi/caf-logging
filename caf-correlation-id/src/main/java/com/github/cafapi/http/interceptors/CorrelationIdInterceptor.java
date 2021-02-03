@@ -27,19 +27,24 @@ import org.slf4j.MDC;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-public final class CorrelationIdInterceptor extends HandlerInterceptorAdapter {
+public final class CorrelationIdInterceptor extends HandlerInterceptorAdapter
+{
     @Override
-    public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) {
+    public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
+    {
         final String correlationId = request.getHeader(headerName);
-        if (Objects.nonNull(correlationId) && !correlationId.isEmpty()) {
+        if(Objects.nonNull(correlationId) && !correlationId.isEmpty())
+        {
             MDC.put(mdcKey, correlationId);
+            response.setHeader(headerName, correlationId);
         }
         return true;
     }
     
     @Override
     public void postHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler,
-                           final ModelAndView modelAndView) {
+                           final ModelAndView modelAndView)
+    {
         MDC.remove(mdcKey);
     }
 }

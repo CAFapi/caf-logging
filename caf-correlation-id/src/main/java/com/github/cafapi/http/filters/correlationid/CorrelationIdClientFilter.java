@@ -15,6 +15,9 @@
  */
 package com.github.cafapi.http.filters.correlationid;
 
+import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.headerName;
+import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.mdcKey;
+
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,12 +28,14 @@ import javax.ws.rs.ext.Provider;
 import org.slf4j.MDC;
 
 @Provider
-public class CorrelationIdClientFilter implements ClientRequestFilter {
+public class CorrelationIdClientFilter implements ClientRequestFilter
+{
     
     @Override
-    public void filter(ClientRequestContext requestContext) {
-        String correlationId = Optional.ofNullable(MDC.get(CorrelationIdConfigurationConstants.mdcKey)).orElseGet(() -> UUID.randomUUID().toString());
-        requestContext.getHeaders().add(CorrelationIdConfigurationConstants.headerName, correlationId);
+    public void filter(ClientRequestContext requestContext)
+    {
+        String correlationId = Optional.ofNullable(MDC.get(mdcKey)).orElseGet(() -> UUID.randomUUID().toString());
+        requestContext.getHeaders().add(headerName, correlationId);
     }
     
 }
