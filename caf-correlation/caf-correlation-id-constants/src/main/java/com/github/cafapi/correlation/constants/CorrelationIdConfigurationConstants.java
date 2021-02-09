@@ -17,6 +17,10 @@ package com.github.cafapi.correlation.constants;
 
 public final class CorrelationIdConfigurationConstants
 {
+    private CorrelationIdConfigurationConstants()
+    {
+    }
+
     public static final String HEADER_NAME = "CAF-Correlation-Id";
     public static final String MDC_KEY = "correlationId";
 }
