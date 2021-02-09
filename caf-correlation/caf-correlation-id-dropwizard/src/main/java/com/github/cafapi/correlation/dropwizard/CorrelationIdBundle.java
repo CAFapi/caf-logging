@@ -26,12 +26,12 @@ import javax.servlet.DispatcherType;
 public class CorrelationIdBundle<C extends Configuration> implements ConfiguredBundle<C>
 {
     @Override
-    public void initialize(Bootstrap<?> bootstrap)
+    public void initialize(final Bootstrap<?> bootstrap)
     {
     }
 
     @Override
-    public void run(C configuration, Environment environment)
+    public void run(final C configuration, final Environment environment)
     {
         environment.servlets()
             .addFilter("correlation-id-servlet-filter", new CorrelationIdFilter())

@@ -24,7 +24,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication(scanBasePackages = {"com.filter.http.spring"})
 public class TestingWebApplication implements WebMvcConfigurer
 {
-    public static void main(String[] args)
+    public static void main(final String[] args)
     {
         SpringApplication.run(TestingWebApplication.class, args);
     }

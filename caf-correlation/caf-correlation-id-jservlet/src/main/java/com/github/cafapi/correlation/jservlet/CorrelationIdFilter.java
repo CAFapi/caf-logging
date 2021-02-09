@@ -32,16 +32,20 @@ import org.slf4j.MDC;
 public class CorrelationIdFilter implements Filter
 {
     @Override
-    public void init(FilterConfig filterConfig)
+    public void init(final FilterConfig filterConfig)
     {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
+    public void doFilter(
+        final ServletRequest request,
+        final ServletResponse response,
+        final FilterChain chain
+    ) throws IOException, ServletException
     {
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse resp = (HttpServletResponse) response;
-        String correlationId = Optional.ofNullable(req.getHeader(CorrelationIdConfigurationConstants.HEADER_NAME))
+        final HttpServletRequest req = (HttpServletRequest) request;
+        final HttpServletResponse resp = (HttpServletResponse) response;
+        final String correlationId = Optional.ofNullable(req.getHeader(CorrelationIdConfigurationConstants.HEADER_NAME))
             .orElseGet(() -> UUID.randomUUID().toString());
         MDC.put(CorrelationIdConfigurationConstants.MDC_KEY, correlationId);
         resp.addHeader(CorrelationIdConfigurationConstants.HEADER_NAME, correlationId);

@@ -37,7 +37,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class TestingWebApplicationTests
+public final class TestingWebApplicationTests
 {
     @LocalServerPort
     private int port;
@@ -54,16 +54,16 @@ public class TestingWebApplicationTests
     public void testInterceptor()
     {
         //prepare
-        HttpHeaders httpHeaders = new HttpHeaders();
+        final HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(HEADER_NAME, "UUID1");
-        HttpEntity<?> request = new HttpEntity<>(httpHeaders);
+        final HttpEntity<?> request = new HttpEntity<>(httpHeaders);
 
         //act
-        HttpEntity<String> responseEntity
+        final HttpEntity<String> responseEntity
             = this.restTemplate.exchange("http://localhost:" + port + "/greeting", HttpMethod.GET, request, String.class);
 
         //assert
-        String correlationID = responseEntity.getHeaders().get(HEADER_NAME).get(0);
+        final String correlationID = responseEntity.getHeaders().get(HEADER_NAME).get(0);
         Assertions.assertThat(correlationID).isNotNull();
         Assertions.assertThat(correlationID).isEqualTo("UUID1");
     }
@@ -73,12 +73,12 @@ public class TestingWebApplicationTests
     {
         //prepare
         final Client client = ClientBuilder.newClient();
-        String UUIDValue = UUID.randomUUID().toString();
+        final String UUIDValue = UUID.randomUUID().toString();
         MDC.put(MDC_KEY, UUIDValue);
         client.register(new CorrelationIdClientFilter());
 
         //act
-        Response response = client
+        final Response response = client
             .target("http://localhost:" + port + "/greeting")
             .request()
             .get();

@@ -28,9 +28,9 @@ import org.slf4j.MDC;
 public class CorrelationIdClientFilter implements ClientRequestFilter
 {
     @Override
-    public void filter(ClientRequestContext requestContext)
+    public void filter(final ClientRequestContext requestContext)
     {
-        String correlationId = Optional.ofNullable(MDC.get(MDC_KEY)).orElseGet(() -> UUID.randomUUID().toString());
+        final String correlationId = Optional.ofNullable(MDC.get(MDC_KEY)).orElseGet(() -> UUID.randomUUID().toString());
         requestContext.getHeaders().add(HEADER_NAME, correlationId);
     }
 }

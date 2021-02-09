@@ -32,16 +32,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
-class CorrelationIdDropwizardTest
+final class CorrelationIdDropwizardTest
 {
-    private static DropwizardAppExtension<Configuration> EXT = new DropwizardAppExtension<>(TestApp.class, new Configuration());
+    private static final DropwizardAppExtension<Configuration> EXT = new DropwizardAppExtension<>(TestApp.class, new Configuration());
 
     @Test
     void testCorrelationIdIsAddedIfNotPresentInRequest()
     {
-        Client client = EXT.client();
+        final Client client = EXT.client();
 
-        Response response = client.target(
+        final Response response = client.target(
             String.format("http://localhost:%d/ping", EXT.getLocalPort()))
             .request()
             .get();
@@ -52,9 +52,9 @@ class CorrelationIdDropwizardTest
     @Test
     void testRequestWithHeader()
     {
-        Client client = EXT.client();
+        final Client client = EXT.client();
 
-        Response response = client.target(
+        final Response response = client.target(
             String.format("http://localhost:%d/ping", EXT.getLocalPort()))
             .request()
             .header(HEADER_NAME, "UUID1")
@@ -64,16 +64,16 @@ class CorrelationIdDropwizardTest
         Assertions.assertEquals(1, response.getHeaders().get(HEADER_NAME).size());
     }
 
-    public static class TestApp extends Application<Configuration>
+    public static final class TestApp extends Application<Configuration>
     {
         @Override
-        public void initialize(Bootstrap<Configuration> bootstrap)
+        public void initialize(final Bootstrap<Configuration> bootstrap)
         {
             bootstrap.addBundle(new CorrelationIdBundle<>());
         }
 
         @Override
-        public void run(Configuration configuration, Environment environment)
+        public void run(final Configuration configuration, final Environment environment)
         {
             environment.jersey().register(this);
             environment.jersey().register(new PingResource());
@@ -81,7 +81,7 @@ class CorrelationIdDropwizardTest
     }
 
     @Path("/ping")
-    public static class PingResource
+    public static final class PingResource
     {
         @GET
         public String ping()
