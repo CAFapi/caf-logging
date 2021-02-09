@@ -66,11 +66,11 @@
 
     <modules>
         <module>caf-correlation-id-constants</module>
-        <module>caf-correlation-id-dropwizard</module>
         <module>caf-correlation-id-jaxrs</module>
         <module>caf-correlation-id-jservlet</module>
         <module>caf-correlation-id-spring</module>
         <module>caf-correlation-id-spring-tests</module>
+        <module>caf-correlation-id-dropwizard</module>
     </modules>
 
     <properties>
