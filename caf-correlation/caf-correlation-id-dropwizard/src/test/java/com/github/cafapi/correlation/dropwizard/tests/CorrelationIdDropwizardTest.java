@@ -13,27 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.filter.http.dropwizard;
+package com.github.cafapi.correlation.dropwizard.tests;
 
-import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.HEADER_NAME;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.core.Response;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-
-import com.github.cafapi.http.filters.correlationid.CorrelationIdBundle;
-
+import static com.github.cafapi.correlation.constants.CorrelationIdConfigurationConstants.HEADER_NAME;
+import com.github.cafapi.correlation.dropwizard.CorrelationIdBundle;
 import io.dropwizard.Application;
 import io.dropwizard.Configuration;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.core.Response;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
 class CorrelationIdDropwizardTest

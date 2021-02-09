@@ -13,16 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.cafapi.http.interceptors;
+package com.github.cafapi.correlation.spring;
 
-import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.HEADER_NAME;
-import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.MDC_KEY;
-
+import static com.github.cafapi.correlation.constants.CorrelationIdConfigurationConstants.HEADER_NAME;
+import static com.github.cafapi.correlation.constants.CorrelationIdConfigurationConstants.MDC_KEY;
 import java.util.Objects;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.MDC;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;

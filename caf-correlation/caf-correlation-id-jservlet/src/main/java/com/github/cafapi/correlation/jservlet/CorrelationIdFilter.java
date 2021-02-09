@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.cafapi.http.filters.correlationid;
+package com.github.cafapi.correlation.jservlet;
 
+import com.github.cafapi.correlation.constants.CorrelationIdConfigurationConstants;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.UUID;

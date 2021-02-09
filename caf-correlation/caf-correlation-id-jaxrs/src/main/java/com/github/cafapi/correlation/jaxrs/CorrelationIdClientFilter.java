@@ -13,18 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.cafapi.http.filters.correlationid;
+package com.github.cafapi.correlation.jaxrs;
 
-import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.HEADER_NAME;
-import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.MDC_KEY;
-
+import static com.github.cafapi.correlation.constants.CorrelationIdConfigurationConstants.HEADER_NAME;
+import static com.github.cafapi.correlation.constants.CorrelationIdConfigurationConstants.MDC_KEY;
 import java.util.Optional;
 import java.util.UUID;
-
 import javax.ws.rs.client.ClientRequestContext;
 import javax.ws.rs.client.ClientRequestFilter;
 import javax.ws.rs.ext.Provider;
-
 import org.slf4j.MDC;
 
 @Provider

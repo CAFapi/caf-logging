@@ -13,17 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.filter.http.spring;
+package com.github.cafapi.correlation.spring.tests;
 
-import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.HEADER_NAME;
-import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.MDC_KEY;
-
+import static com.github.cafapi.correlation.constants.CorrelationIdConfigurationConstants.HEADER_NAME;
+import static com.github.cafapi.correlation.constants.CorrelationIdConfigurationConstants.MDC_KEY;
+import com.github.cafapi.correlation.jaxrs.CorrelationIdClientFilter;
 import java.util.UUID;
-
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.Response;
-
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,8 +34,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import com.github.cafapi.http.filters.correlationid.CorrelationIdClientFilter;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

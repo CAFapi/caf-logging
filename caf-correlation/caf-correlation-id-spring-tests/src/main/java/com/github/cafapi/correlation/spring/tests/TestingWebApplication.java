@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.filter.http.spring;
+package com.github.cafapi.correlation.spring.tests;
 
+import com.github.cafapi.correlation.spring.CorrelationIdInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import com.github.cafapi.http.interceptors.CorrelationIdInterceptor;
 
 @SpringBootApplication(scanBasePackages = {"com.filter.http.spring"})
 public class TestingWebApplication implements WebMvcConfigurer
