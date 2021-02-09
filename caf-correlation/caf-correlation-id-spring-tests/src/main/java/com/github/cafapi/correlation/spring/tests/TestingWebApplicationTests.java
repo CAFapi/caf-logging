@@ -39,18 +39,17 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TestingWebApplicationTests
 {
-    
     @LocalServerPort
     private int port;
-    
+
     @Autowired
     private TestRestTemplate restTemplate;
-    
+
     @Test
     public void contextLoads()
     {
     }
-    
+
     @Test
     public void testInterceptor()
     {
@@ -58,16 +57,17 @@ public class TestingWebApplicationTests
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(HEADER_NAME, "UUID1");
         HttpEntity<?> request = new HttpEntity<>(httpHeaders);
-        
+
         //act
-        HttpEntity<String> responseEntity = this.restTemplate.exchange("http://localhost:" + port + "/greeting", HttpMethod.GET, request, String.class);
-        
+        HttpEntity<String> responseEntity
+            = this.restTemplate.exchange("http://localhost:" + port + "/greeting", HttpMethod.GET, request, String.class);
+
         //assert
         String correlationID = responseEntity.getHeaders().get(HEADER_NAME).get(0);
         Assertions.assertThat(correlationID).isNotNull();
         Assertions.assertThat(correlationID).isEqualTo("UUID1");
     }
-    
+
     @Test
     public void testClientFilter()
     {
@@ -76,17 +76,16 @@ public class TestingWebApplicationTests
         String UUIDValue = UUID.randomUUID().toString();
         MDC.put(MDC_KEY, UUIDValue);
         client.register(new CorrelationIdClientFilter());
-        
+
         //act
         Response response = client
-                .target("http://localhost:" + port + "/greeting")
-                .request()
-                .get();
-        
+            .target("http://localhost:" + port + "/greeting")
+            .request()
+            .get();
+
         //assert
         Assertions.assertThat(response.getHeaders().get(HEADER_NAME)).isNotNull();
         Assertions.assertThat(response.getHeaders().get(HEADER_NAME).get(0)).isEqualTo(UUIDValue);
         Assertions.assertThat(response.getHeaders().get(HEADER_NAME).size()).isEqualTo(1);
     }
-    
 }

@@ -22,12 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GreetingController
 {
-    
     @RequestMapping("/greeting")
     public @ResponseBody
     String greeting()
     {
         return "Hello !!!";
     }
-    
 }

@@ -23,17 +23,18 @@ import io.dropwizard.setup.Environment;
 import java.util.EnumSet;
 import javax.servlet.DispatcherType;
 
-public class CorrelationIdBundle<C extends Configuration> implements ConfiguredBundle<C> {
-    
+public class CorrelationIdBundle<C extends Configuration> implements ConfiguredBundle<C>
+{
     @Override
-    public void initialize(Bootstrap<?> bootstrap) {
-    
+    public void initialize(Bootstrap<?> bootstrap)
+    {
     }
-    
+
     @Override
-    public void run(C configuration, Environment environment) {
+    public void run(C configuration, Environment environment)
+    {
         environment.servlets()
-                .addFilter("correlation-id-servlet-filter", new CorrelationIdFilter())
-                .addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), false, "*");
+            .addFilter("correlation-id-servlet-filter", new CorrelationIdFilter())
+            .addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), false, "*");
     }
 }

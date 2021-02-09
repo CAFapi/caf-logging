@@ -34,37 +34,36 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith(DropwizardExtensionsSupport.class)
 class CorrelationIdDropwizardTest
 {
-    
     private static DropwizardAppExtension<Configuration> EXT = new DropwizardAppExtension<>(TestApp.class, new Configuration());
-    
+
     @Test
     void testCorrelationIdIsAddedIfNotPresentInRequest()
     {
         Client client = EXT.client();
-        
+
         Response response = client.target(
-                String.format("http://localhost:%d/ping", EXT.getLocalPort()))
-                .request()
-                .get();
-        
+            String.format("http://localhost:%d/ping", EXT.getLocalPort()))
+            .request()
+            .get();
+
         Assertions.assertNotNull(response.getHeaders().get(HEADER_NAME));
     }
-    
+
     @Test
     void testRequestWithHeader()
     {
         Client client = EXT.client();
-        
+
         Response response = client.target(
-                String.format("http://localhost:%d/ping", EXT.getLocalPort()))
-                .request()
-                .header(HEADER_NAME, "UUID1")
-                .get();
-        
+            String.format("http://localhost:%d/ping", EXT.getLocalPort()))
+            .request()
+            .header(HEADER_NAME, "UUID1")
+            .get();
+
         Assertions.assertEquals("UUID1", response.getHeaders().get(HEADER_NAME).get(0));
         Assertions.assertEquals(1, response.getHeaders().get(HEADER_NAME).size());
     }
-    
+
     public static class TestApp extends Application<Configuration>
     {
         @Override
@@ -72,7 +71,7 @@ class CorrelationIdDropwizardTest
         {
             bootstrap.addBundle(new CorrelationIdBundle<>());
         }
-        
+
         @Override
         public void run(Configuration configuration, Environment environment)
         {
@@ -80,7 +79,7 @@ class CorrelationIdDropwizardTest
             environment.jersey().register(new PingResource());
         }
     }
-    
+
     @Path("/ping")
     public static class PingResource
     {
@@ -90,5 +89,4 @@ class CorrelationIdDropwizardTest
             return "pong";
         }
     }
-    
 }

@@ -27,12 +27,10 @@ import org.slf4j.MDC;
 @Provider
 public class CorrelationIdClientFilter implements ClientRequestFilter
 {
-    
     @Override
     public void filter(ClientRequestContext requestContext)
     {
         String correlationId = Optional.ofNullable(MDC.get(MDC_KEY)).orElseGet(() -> UUID.randomUUID().toString());
         requestContext.getHeaders().add(HEADER_NAME, correlationId);
     }
-    
 }

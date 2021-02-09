@@ -28,7 +28,7 @@ public class TestingWebApplication implements WebMvcConfigurer
     {
         SpringApplication.run(TestingWebApplication.class, args);
     }
-    
+
     @Override
     public void addInterceptors(final InterceptorRegistry registry)
     {
