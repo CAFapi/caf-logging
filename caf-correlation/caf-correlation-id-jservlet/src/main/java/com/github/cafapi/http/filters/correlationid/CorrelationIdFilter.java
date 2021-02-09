@@ -38,9 +38,9 @@ public class CorrelationIdFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
-        String correlationId = Optional.ofNullable(req.getHeader(CorrelationIdConfigurationConstants.headerName)).orElseGet(() -> UUID.randomUUID().toString());
-        MDC.put(CorrelationIdConfigurationConstants.mdcKey, correlationId);
-        resp.addHeader(CorrelationIdConfigurationConstants.headerName, correlationId);
+        String correlationId = Optional.ofNullable(req.getHeader(CorrelationIdConfigurationConstants.HEADER_NAME)).orElseGet(() -> UUID.randomUUID().toString());
+        MDC.put(CorrelationIdConfigurationConstants.MDC_KEY, correlationId);
+        resp.addHeader(CorrelationIdConfigurationConstants.HEADER_NAME, correlationId);
         chain.doFilter(request, response);
     }
     

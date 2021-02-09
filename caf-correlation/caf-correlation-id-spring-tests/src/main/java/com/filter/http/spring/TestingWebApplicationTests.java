@@ -15,8 +15,8 @@
  */
 package com.filter.http.spring;
 
-import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.headerName;
-import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.mdcKey;
+import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.HEADER_NAME;
+import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.MDC_KEY;
 
 import java.util.UUID;
 
@@ -60,14 +60,14 @@ public class TestingWebApplicationTests
     {
         //prepare
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(headerName, "UUID1");
+        httpHeaders.add(HEADER_NAME, "UUID1");
         HttpEntity<?> request = new HttpEntity<>(httpHeaders);
         
         //act
         HttpEntity<String> responseEntity = this.restTemplate.exchange("http://localhost:" + port + "/greeting", HttpMethod.GET, request, String.class);
         
         //assert
-        String correlationID = responseEntity.getHeaders().get(headerName).get(0);
+        String correlationID = responseEntity.getHeaders().get(HEADER_NAME).get(0);
         Assertions.assertThat(correlationID).isNotNull();
         Assertions.assertThat(correlationID).isEqualTo("UUID1");
     }
@@ -78,7 +78,7 @@ public class TestingWebApplicationTests
         //prepare
         final Client client = ClientBuilder.newClient();
         String UUIDValue = UUID.randomUUID().toString();
-        MDC.put(mdcKey, UUIDValue);
+        MDC.put(MDC_KEY, UUIDValue);
         client.register(new CorrelationIdClientFilter());
         
         //act
@@ -88,9 +88,9 @@ public class TestingWebApplicationTests
                 .get();
         
         //assert
-        Assertions.assertThat(response.getHeaders().get(headerName)).isNotNull();
-        Assertions.assertThat(response.getHeaders().get(headerName).get(0)).isEqualTo(UUIDValue);
-        Assertions.assertThat(response.getHeaders().get(headerName).size()).isEqualTo(1);
+        Assertions.assertThat(response.getHeaders().get(HEADER_NAME)).isNotNull();
+        Assertions.assertThat(response.getHeaders().get(HEADER_NAME).get(0)).isEqualTo(UUIDValue);
+        Assertions.assertThat(response.getHeaders().get(HEADER_NAME).size()).isEqualTo(1);
     }
     
 }

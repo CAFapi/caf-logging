@@ -15,7 +15,7 @@
  */
 package com.filter.http.dropwizard;
 
-import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.headerName;
+import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.HEADER_NAME;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -51,7 +51,7 @@ class CorrelationIdDropwizardTest
                 .request()
                 .get();
         
-        Assertions.assertNotNull(response.getHeaders().get(headerName));
+        Assertions.assertNotNull(response.getHeaders().get(HEADER_NAME));
     }
     
     @Test
@@ -62,11 +62,11 @@ class CorrelationIdDropwizardTest
         Response response = client.target(
                 String.format("http://localhost:%d/ping", EXT.getLocalPort()))
                 .request()
-                .header(headerName, "UUID1")
+                .header(HEADER_NAME, "UUID1")
                 .get();
         
-        Assertions.assertEquals("UUID1", response.getHeaders().get(headerName).get(0));
-        Assertions.assertEquals(1, response.getHeaders().get(headerName).size());
+        Assertions.assertEquals("UUID1", response.getHeaders().get(HEADER_NAME).get(0));
+        Assertions.assertEquals(1, response.getHeaders().get(HEADER_NAME).size());
     }
     
     public static class TestApp extends Application<Configuration>

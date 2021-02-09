@@ -17,6 +17,6 @@ package com.github.cafapi.http.filters.correlationid;
 
 public class CorrelationIdConfigurationConstants
 {
-    public static final String headerName = "CAF-Correlation-Id";
-    public static final String mdcKey = "correlationId";
+    public static final String HEADER_NAME = "CAF-Correlation-Id";
+    public static final String MDC_KEY = "correlationId";
 }

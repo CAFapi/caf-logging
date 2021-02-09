@@ -15,8 +15,8 @@
  */
 package com.github.cafapi.http.filters.correlationid;
 
-import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.headerName;
-import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.mdcKey;
+import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.HEADER_NAME;
+import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.MDC_KEY;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -34,8 +34,8 @@ public class CorrelationIdClientFilter implements ClientRequestFilter
     @Override
     public void filter(ClientRequestContext requestContext)
     {
-        String correlationId = Optional.ofNullable(MDC.get(mdcKey)).orElseGet(() -> UUID.randomUUID().toString());
-        requestContext.getHeaders().add(headerName, correlationId);
+        String correlationId = Optional.ofNullable(MDC.get(MDC_KEY)).orElseGet(() -> UUID.randomUUID().toString());
+        requestContext.getHeaders().add(HEADER_NAME, correlationId);
     }
     
 }

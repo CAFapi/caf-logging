@@ -15,8 +15,8 @@
  */
 package com.github.cafapi.http.interceptors;
 
-import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.headerName;
-import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.mdcKey;
+import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.HEADER_NAME;
+import static com.github.cafapi.http.filters.correlationid.CorrelationIdConfigurationConstants.MDC_KEY;
 
 import java.util.Objects;
 
@@ -32,11 +32,11 @@ public final class CorrelationIdInterceptor extends HandlerInterceptorAdapter
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
     {
-        final String correlationId = request.getHeader(headerName);
+        final String correlationId = request.getHeader(HEADER_NAME);
         if(Objects.nonNull(correlationId) && !correlationId.isEmpty())
         {
-            MDC.put(mdcKey, correlationId);
-            response.setHeader(headerName, correlationId);
+            MDC.put(MDC_KEY, correlationId);
+            response.setHeader(HEADER_NAME, correlationId);
         }
         return true;
     }
@@ -45,6 +45,6 @@ public final class CorrelationIdInterceptor extends HandlerInterceptorAdapter
     public void postHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler,
                            final ModelAndView modelAndView)
     {
-        MDC.remove(mdcKey);
+        MDC.remove(MDC_KEY);
     }
 }
