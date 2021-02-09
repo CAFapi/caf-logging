@@ -74,7 +74,7 @@ class CorrelationIdDropwizardTest
         @Override
         public void initialize(Bootstrap<Configuration> bootstrap)
         {
-            bootstrap.addBundle(new CorrelationIdBundle());
+            bootstrap.addBundle(new CorrelationIdBundle<>());
         }
         
         @Override

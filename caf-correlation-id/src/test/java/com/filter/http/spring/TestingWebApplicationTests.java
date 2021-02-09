@@ -61,10 +61,10 @@ public class TestingWebApplicationTests
         //prepare
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(headerName, "UUID1");
-        HttpEntity request = new HttpEntity(httpHeaders);
+        HttpEntity<?> request = new HttpEntity<>(httpHeaders);
         
         //act
-        HttpEntity responseEntity = this.restTemplate.exchange("http://localhost:" + port + "/greeting", HttpMethod.GET, request, String.class);
+        HttpEntity<String> responseEntity = this.restTemplate.exchange("http://localhost:" + port + "/greeting", HttpMethod.GET, request, String.class);
         
         //assert
         String correlationID = responseEntity.getHeaders().get(headerName).get(0);
