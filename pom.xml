@@ -69,7 +69,6 @@
         <module>caf-logging-logback</module>
         <module>caf-logging-logback-converters</module>
         <module>caf-logging-logback-access-converters</module>
-        <module>caf-correlation</module>
     </modules>
 
     <properties>
