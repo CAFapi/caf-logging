@@ -65,12 +65,12 @@
     </scm>
 
     <modules>
-        <module>caf-correlation-id-constants</module>
-        <module>caf-correlation-id-jaxrs</module>
-        <module>caf-correlation-id-jservlet</module>
-        <module>caf-correlation-id-spring</module>
-        <module>caf-correlation-id-spring-tests</module>
-        <module>caf-correlation-id-dropwizard</module>
+        <module>caf-correlation-constants</module>
+        <module>caf-correlation-jaxrs</module>
+        <module>caf-correlation-jservlet</module>
+        <module>caf-correlation-spring</module>
+        <module>caf-correlation-spring-tests</module>
+        <module>caf-correlation-dropwizard</module>
     </modules>
 
     <properties>
@@ -97,22 +97,22 @@
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.correlation</groupId>
-                <artifactId>caf-correlation-id-constants</artifactId>
+                <artifactId>caf-correlation-constants</artifactId>
                 <version>1.4.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.correlation</groupId>
-                <artifactId>caf-correlation-id-jaxrs</artifactId>
+                <artifactId>caf-correlation-jaxrs</artifactId>
                 <version>1.4.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.correlation</groupId>
-                <artifactId>caf-correlation-id-jservlet</artifactId>
+                <artifactId>caf-correlation-jservlet</artifactId>
                 <version>1.4.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.correlation</groupId>
-                <artifactId>caf-correlation-id-spring</artifactId>
+                <artifactId>caf-correlation-spring</artifactId>
                 <version>1.4.0-SNAPSHOT</version>
             </dependency>
         </dependencies>

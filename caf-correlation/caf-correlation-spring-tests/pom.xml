@@ -27,7 +27,7 @@
         <version>1.4.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>caf-correlation-id-spring-tests</artifactId>
+    <artifactId>caf-correlation-spring-tests</artifactId>
 
     <properties>
         <maven.install.skip>true</maven.install.skip>
@@ -38,15 +38,15 @@
         <!-- Test Dependencies -->
         <dependency>
             <groupId>com.github.cafapi.correlation</groupId>
-            <artifactId>caf-correlation-id-constants</artifactId>
+            <artifactId>caf-correlation-constants</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.cafapi.correlation</groupId>
-            <artifactId>caf-correlation-id-jaxrs</artifactId>
+            <artifactId>caf-correlation-jaxrs</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.cafapi.correlation</groupId>
-            <artifactId>caf-correlation-id-spring</artifactId>
+            <artifactId>caf-correlation-spring</artifactId>
         </dependency>
         <dependency>
             <groupId>jakarta.ws.rs</groupId>

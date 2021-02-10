@@ -27,6 +27,6 @@
         <version>1.4.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>caf-correlation-id-constants</artifactId>
+    <artifactId>caf-correlation-constants</artifactId>
 
 </project>

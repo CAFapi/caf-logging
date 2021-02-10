@@ -27,21 +27,25 @@
         <version>1.4.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>caf-correlation-id-jaxrs</artifactId>
+    <artifactId>caf-correlation-spring</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.github.cafapi.correlation</groupId>
-            <artifactId>caf-correlation-id-constants</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.ws.rs</groupId>
-            <artifactId>jakarta.ws.rs-api</artifactId>
-            <scope>provided</scope>
+            <artifactId>caf-correlation-constants</artifactId>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

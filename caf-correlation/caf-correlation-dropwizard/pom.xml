@@ -27,12 +27,12 @@
         <version>1.4.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>caf-correlation-id-dropwizard</artifactId>
+    <artifactId>caf-correlation-dropwizard</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.github.cafapi.correlation</groupId>
-            <artifactId>caf-correlation-id-jservlet</artifactId>
+            <artifactId>caf-correlation-jservlet</artifactId>
         </dependency>
         <dependency>
             <groupId>io.dropwizard</groupId>
@@ -49,7 +49,7 @@
         </dependency>
         <dependency>
             <groupId>com.github.cafapi.correlation</groupId>
-            <artifactId>caf-correlation-id-constants</artifactId>
+            <artifactId>caf-correlation-constants</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
