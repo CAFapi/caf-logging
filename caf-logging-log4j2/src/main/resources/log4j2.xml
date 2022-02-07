@@ -27,7 +27,7 @@
     </Appenders>
     <Loggers>
         <Root level="${env:CAF_LOG_LEVEL:-INFO}">
-            <AppenderRef ref="STDOUT" />
+            <AppenderRef ref="STDERR" />
         </Root> 
     </Loggers>
 </Configuration>
