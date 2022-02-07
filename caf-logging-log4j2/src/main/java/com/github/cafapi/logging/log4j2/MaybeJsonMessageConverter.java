@@ -47,7 +47,7 @@ public final class MaybeJsonMessageConverter extends ThrowablePatternConverter
 
     @Override
     public void format(final LogEvent event, final StringBuilder buffer)
-    {//adding test comment
+    {
         final ThrowableProxy throwableProxy = event.getThrownProxy();
         final String message = event.getMessage().getFormattedMessage();
 
