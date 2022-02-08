@@ -16,10 +16,10 @@ This project configures Logback and Log4j2 to meet the CAF Logging Standard.
     - Exception stack traces are JSON-encoded so that they do not span multiple lines.
 
 #### Pattern:
-    [(UTC Time) #(Process Id).(Thread Id) (Log Level) (Tenant Id) (Correlation Id)] (Logger): (Log Message)
+    [(date) (UTC Time) #(Process Id).(Thread Id) (Log Level) (Tenant Id) (Correlation Id)] (Logger): (Log Message)
 
 #### Example:
-    [10:50:25.465Z #bff.009 DEBUG acme-corp    -   ] com.github.example.Logger: Example Log Message
+    [2022-02-08 10:50:25.465Z #bff.009 DEBUG acme-corp    -   ] com.github.example.Logger: Example Log Message
 
 To log the tenant and correlation ids the service using this configuration must use SLF4J's [MDC](https://www.slf4j.org/manual.html#mdc).  
 Example commands:
