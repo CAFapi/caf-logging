@@ -16,7 +16,7 @@ This project configures Logback and Log4j2 to meet the CAF Logging Standard.
     - Exception stack traces are JSON-encoded so that they do not span multiple lines.
 
 #### Pattern:
-    [(Date) (UTC Time) #(Process Id).(Thread Id) (Log Level) (Tenant Id) (Correlation Id)] (Logger): (Log Message)
+    [(UTC Date) (UTC Time) #(Process Id).(Thread Id) (Log Level) (Tenant Id) (Correlation Id)] (Logger): (Log Message)
 
 #### Example:
     [2022-02-08 10:50:25.465Z #bff.009 DEBUG acme-corp    -   ] com.github.example.Logger: Example Log Message
