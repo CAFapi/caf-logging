@@ -10,6 +10,9 @@ Berksfile.lock
 .settings/
 .idea/
 .vscode/
+obj/
+.vs/
+sepg-dotnet-build-adapter.csproj.user
 overlays/
 build-info.json
 .env
