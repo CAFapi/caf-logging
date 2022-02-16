@@ -52,7 +52,7 @@
                      </environmentVariables>
                  </configuration>
                  <executions>
-                     <!--<execution>
+                     <execution>
                          <id>exec-dotnet-clean</id>
                          <phase>clean</phase>
                          <goals>
@@ -64,8 +64,8 @@
                                  <argument>clean</argument>
                              </arguments>
                          </configuration>
-                     </execution>-->
-                     <!--<execution>
+                     </execution>
+                     <execution>
                          <id>exec-dotnet-restore</id>
                          <phase>initialize</phase>
                          <goals>
@@ -77,22 +77,8 @@
                                  <argument>restore</argument>
                              </arguments>
                          </configuration>
-                     </execution>-->
-                     <!--<execution>
-                         <id>exec-dotnet-pack</id>
-                         <phase>package</phase>
-                         <goals>
-                             <goal>exec</goal>
-                         </goals>
-                         <configuration>
-                             <executable>dotnet</executable>
-                             <arguments>
-                                 <argument>pack</argument>
-                                 <argument>&#45;&#45;no-build</argument>
-                             </arguments>
-                         </configuration>
-                     </execution>-->
-                     <!--<execution>
+                     </execution>
+                     <execution>
                          <id>exec-dotnet-pack-for-deploy</id>
                          <phase>deploy</phase>
                          <goals>
@@ -102,12 +88,12 @@
                              <executable>dotnet</executable>
                              <arguments>
                                  <argument>pack</argument>
-                                 <argument>&#45;&#45;no-build</argument>
-                                 <argument>&#45;&#45;output</argument>
+                                 <argument>--no-build</argument>
+                                 <argument>--output</argument>
                                  <argument>${nugetOutputFolder}</argument>
                              </arguments>
                          </configuration>
-                     </execution>-->
+                     </execution>
                  </executions>
              </plugin>
              <plugin>
