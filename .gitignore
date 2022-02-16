@@ -11,6 +11,7 @@ Berksfile.lock
 .idea/
 .vscode/
 obj/
+bin/
 .vs/
 sepg-dotnet-build-adapter.csproj.user
 overlays/
