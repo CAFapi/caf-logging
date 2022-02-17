@@ -69,7 +69,7 @@
         <module>caf-logging-logback</module>
         <module>caf-logging-logback-converters</module>
         <module>caf-logging-logback-access-converters</module>
-        <module>caf-logging-dotnet</module>
+        <module>caf-logging-serilog</module>
     </modules>
 
     <properties>
