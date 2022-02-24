@@ -113,8 +113,8 @@ public class LogInjectionTests
 
         public StdOutRedirector(final OutputStream out)
         {
-            this.originalStdOut = System.out;
-            System.setOut(new PrintStream(out));
+            this.originalStdOut = System.err;
+            System.setErr(new PrintStream(out));
         }
 
         @Override
