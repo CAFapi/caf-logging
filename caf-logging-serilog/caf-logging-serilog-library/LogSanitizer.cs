@@ -5,7 +5,7 @@ using System.Text;
 
 namespace nuget_sample_caf_logging
 {
-    static class LogSanitizer
+    public static class LogSanitizer
     {
         readonly static Char[] forbiddenCharacters = new char[] { '[', '^', '\\', 'w', ' ', '-', '.', ']' };
 

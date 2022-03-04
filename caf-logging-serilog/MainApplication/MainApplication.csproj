@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\nuget_sample_caf_logging\nuget-sample-caf-logging.csproj" />
+    <ProjectReference Include="..\caf-logging-serilog-library\caf-logging-serilog-library.csproj" />
   </ItemGroup>
 
 </Project>
