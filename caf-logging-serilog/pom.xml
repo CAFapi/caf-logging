@@ -52,7 +52,7 @@
                      </environmentVariables>
                  </configuration>
                  <executions>
-                     <!--<execution>
+                     <execution>
                          <id>exec-dotnet-clean</id>
                          <phase>clean</phase>
                          <goals>
@@ -64,7 +64,7 @@
                                  <argument>clean</argument>
                              </arguments>
                          </configuration>
-                     </execution>-->
+                     </execution>
                      <execution>
                          <id>exec-dotnet-restore</id>
                          <phase>initialize</phase>
@@ -230,6 +230,60 @@
                                          <argument>end</argument>
                                          <argument>/d:sonar.login=${sonar.login}</argument>
                                      </arguments>
+                                 </configuration>
+                             </execution>
+                         </executions>
+                     </plugin>
+                     <!-- Set the repository id and url properties for the deployment goal -->
+                     <plugin>
+                         <groupId>org.codehaus.gmavenplus</groupId>
+                         <artifactId>gmavenplus-plugin</artifactId>
+                         <executions>
+                             <execution>
+                                 <id>set-deployment-properties</id>
+                                 <phase>deploy</phase>
+                                 <goals>
+                                     <goal>execute</goal>
+                                 </goals>
+                                 <configuration>
+                                     <scripts>
+                                         <script><![CDATA[
+                                    def repository = project.version.endsWith('-SNAPSHOT')
+                                        ? project.distributionManagement.snapshotRepository
+                                        : project.distributionManagement.repository;
+                                    project.properties.setProperty('repositoryId', repository.id);
+                                    project.properties.setProperty('url', repository.url);
+                                ]]></script>
+                                     </scripts>
+                                 </configuration>
+                             </execution>
+                         </executions>
+                         <dependencies>
+                             <dependency>
+                                 <groupId>org.codehaus.groovy</groupId>
+                                 <artifactId>groovy-all</artifactId>
+                                 <version>3.0.9</version>
+                                 <type>pom</type>
+                                 <scope>runtime</scope>
+                             </dependency>
+                         </dependencies>
+                     </plugin>
+
+                     <!-- Deploy the parent project POM file -->
+                     <plugin>
+                         <groupId>org.apache.maven.plugins</groupId>
+                         <artifactId>maven-deploy-plugin</artifactId>
+                         <version>3.0.0-M2</version>
+                         <executions>
+                             <execution>
+                                 <id>deploy-parent-project</id>
+                                 <phase>deploy</phase>
+                                 <goals>
+                                     <goal>deploy-file</goal>
+                                 </goals>
+                                 <configuration>
+                                     <file>pom.xml</file>
+                                     <pomFile>pom.xml</pomFile>
                                  </configuration>
                              </execution>
                          </executions>
