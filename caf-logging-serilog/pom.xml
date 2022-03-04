@@ -52,7 +52,7 @@
                      </environmentVariables>
                  </configuration>
                  <executions>
-                     <execution>
+                     <!--<execution>
                          <id>exec-dotnet-clean</id>
                          <phase>clean</phase>
                          <goals>
@@ -64,7 +64,7 @@
                                  <argument>clean</argument>
                              </arguments>
                          </configuration>
-                     </execution>
+                     </execution>-->
                      <execution>
                          <id>exec-dotnet-restore</id>
                          <phase>initialize</phase>
@@ -88,6 +88,20 @@
                              <executable>dotnet</executable>
                              <arguments>
                                  <argument>build</argument>
+                             </arguments>
+                         </configuration>
+                     </execution>
+                     <execution>
+                         <id>exec-dotnet-pack</id>
+                         <phase>package</phase>
+                         <goals>
+                             <goal>exec</goal>
+                         </goals>
+                         <configuration>
+                             <executable>dotnet</executable>
+                             <arguments>
+                                 <argument>pack</argument>
+                                 <argument>--no-build</argument>
                              </arguments>
                          </configuration>
                      </execution>
