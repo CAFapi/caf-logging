@@ -23,9 +23,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.microfocus.caf</groupId>
-        <artifactId>caf-parent</artifactId>
-        <version>3.5.0-598</version>
+        <groupId>com.github.cafapi</groupId>
+        <artifactId>caf-common-parent</artifactId>
+        <version>3.0.0-318</version>
     </parent>
 
     <artifactId>caf-logging-serilog</artifactId>
@@ -36,6 +36,12 @@
         <maven.install.skip>true</maven.install.skip>
         <maven.deploy.skip>false</maven.deploy.skip>
         <nugetOutputFolder>\${project.build.directory}</nugetOutputFolder>
+        <maven.install.skip>true</maven.install.skip>
+        <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
+        <dockerHubOrganization>cafapi</dockerHubOrganization>
+        <dockerCafImagePrefix>${dockerImagePrefix}${dockerHubOrganization}${dockerOrgSeperator}</dockerCafImagePrefix>
+        <dockerProjectVersion>${dockerVersionSeperator}${project.version}</dockerProjectVersion>
+        <DOCKER_HUB_PUBLIC>${dockerHubPublic}</DOCKER_HUB_PUBLIC>
     </properties>
 
      <build>
@@ -288,6 +294,45 @@
                                  </configuration>
                              </execution>
                          </executions>
+                     </plugin>
+                     <plugin>
+                         <groupId>io.fabric8</groupId>
+                         <artifactId>docker-maven-plugin</artifactId>
+                         <version>0.39.1</version>
+                         <executions>
+                             <execution>
+                                 <id>docker-build</id>
+                                 <phase>compile</phase>
+                                 <goals>
+                                     <goal>build</goal>
+                                 </goals>
+                             </execution>
+                             <execution>
+                                 <id>docker-push</id>
+                                 <phase>deploy</phase>
+                                 <goals>
+                                     <goal>push</goal>
+                                 </goals>
+                             </execution>
+                         </executions>
+                         <configuration>
+                             <autoPull>always</autoPull>
+                             <images>
+                                 <image>
+                                     <name>${dockerCafImagePrefix}caf-logging-serilog${dockerProjectVersion}</name>
+                                     <build>
+                                         <dockerFileDir>.</dockerFileDir>
+                                         <args>
+                                             <!-- Enable internet access -->
+                                             <http_proxy>${env.HTTP_PROXY}</http_proxy>
+                                             <https_proxy>${env.HTTPS_PROXY}</https_proxy>
+                                             <no_proxy>${env.NO_PROXY}</no_proxy>
+                                         </args>
+                                     </build>
+                                 </image>
+                             </images>
+                             <verbose>true</verbose>
+                         </configuration>
                      </plugin>
                  </plugins>
              </build>
