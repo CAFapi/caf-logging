@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-FROM dockerhub-private.svsartifactory.swinfra.net/cafapi/opensuse-jdk8-maven:1.0.0
+FROM dockerhub-public.svsartifactory.swinfra.net/cafapi/opensuse-jdk11:3.4.3
 
 RUN zypper -n install libicu wget
 RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc
