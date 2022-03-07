@@ -3,7 +3,7 @@ using Serilog.Configuration;
 using Serilog.Events;
 using System;
 
-namespace nuget_sample_caf_logging
+namespace caf_logging_serilog
 {
     static class LoggerSinkConfigurationExtensions
     {

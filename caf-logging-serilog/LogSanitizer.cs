@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace nuget_sample_caf_logging
+namespace caf_logging_serilog
 {
     public static class LogSanitizer
     {

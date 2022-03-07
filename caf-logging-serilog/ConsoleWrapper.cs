@@ -4,7 +4,7 @@ using Serilog.Parsing;
 using System;
 using System.Linq;
 
-namespace nuget_sample_caf_logging
+namespace caf_logging_serilog
 { 
     public class ConsoleWrapper : ILogEventSink, IDisposable
     {

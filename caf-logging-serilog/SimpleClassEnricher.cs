@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace nuget_sample_caf_logging
+namespace caf_logging_serilog
 {
     class SimpleClassEnricher : ILogEventEnricher
     {
