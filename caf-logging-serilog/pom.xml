@@ -52,24 +52,56 @@
                  <groupId>org.codehaus.mojo</groupId>
                  <artifactId>exec-maven-plugin</artifactId>
                  <version>3.0.0</version>
-                 <configuration>
-                     <environmentVariables>
-                         <RE_BUILD_TYPE>\${RE_BUILD_TYPE}</RE_BUILD_TYPE>
-                         <VERSION>${project.version}</VERSION>
-                     </environmentVariables>
-                 </configuration>
                  <executions>
                      <execution>
-                         <id>exec-dotnet-build</id>
-                         <phase>compile</phase>
+                         <id>exec-dotnet-clean</id>
+                         <phase>clean</phase>
                          <goals>
                              <goal>exec</goal>
                          </goals>
                          <configuration>
                              <executable>dotnet</executable>
                              <arguments>
-                                 <argument>build</argument>
+                                 <argument>clean</argument>
                              </arguments>
+                             <environmentVariables>
+                                 <RE_BUILD_TYPE>${RE_BUILD_TYPE}</RE_BUILD_TYPE>
+                                 <VERSION>1.0.0-SNAPSHOT</VERSION>
+                             </environmentVariables>
+                         </configuration>
+                     </execution>
+                     <execution>
+                         <id>exec-dotnet-restore</id>
+                         <phase>initialize</phase>
+                         <goals>
+                             <goal>exec</goal>
+                         </goals>
+                         <configuration>
+                             <executable>dotnet</executable>
+                             <arguments>
+                                 <argument>restore</argument>
+                             </arguments>
+                             <environmentVariables>
+                                 <RE_BUILD_TYPE>${RE_BUILD_TYPE}</RE_BUILD_TYPE>
+                                 <VERSION>1.0.0-SNAPSHOT</VERSION>
+                             </environmentVariables>
+                         </configuration>
+                     </execution>
+                     <execution>
+                         <id>exec-dotnet-test</id>
+                         <phase>test</phase>
+                         <goals>
+                             <goal>exec</goal>
+                         </goals>
+                         <configuration>
+                             <executable>dotnet</executable>
+                             <arguments>
+                                 <argument>test</argument>
+                             </arguments>
+                             <environmentVariables>
+                                 <RE_BUILD_TYPE>${RE_BUILD_TYPE}</RE_BUILD_TYPE>
+                                 <VERSION>1.0.0-SNAPSHOT</VERSION>
+                             </environmentVariables>
                          </configuration>
                      </execution>
                      <execution>
@@ -84,6 +116,10 @@
                                  <argument>pack</argument>
                                  <argument>--no-build</argument>
                              </arguments>
+                             <environmentVariables>
+                                 <RE_BUILD_TYPE>${RE_BUILD_TYPE}</RE_BUILD_TYPE>
+                                 <VERSION>1.0.0-SNAPSHOT</VERSION>
+                             </environmentVariables>
                          </configuration>
                      </execution>
                      <execution>
@@ -98,11 +134,38 @@
                                  <argument>pack</argument>
                                  <argument>--no-build</argument>
                                  <argument>--output</argument>
-                                 <argument>${nugetOutputFolder}</argument>
+                                 <argument>C:\Users\XLamourec\IdeaProjects\sample-dotnet\target</argument>
                              </arguments>
+                             <environmentVariables>
+                                 <RE_BUILD_TYPE>${RE_BUILD_TYPE}</RE_BUILD_TYPE>
+                                 <VERSION>1.0.0-SNAPSHOT</VERSION>
+                             </environmentVariables>
+                         </configuration>
+                     </execution>
+                     <execution>
+                         <id>exec-dotnet-build</id>
+                         <phase>compile</phase>
+                         <goals>
+                             <goal>exec</goal>
+                         </goals>
+                         <configuration>
+                             <executable>dotnet</executable>
+                             <arguments>
+                                 <argument>build</argument>
+                             </arguments>
+                             <environmentVariables>
+                                 <RE_BUILD_TYPE>${RE_BUILD_TYPE}</RE_BUILD_TYPE>
+                                 <VERSION>1.0.0-SNAPSHOT</VERSION>
+                             </environmentVariables>
                          </configuration>
                      </execution>
                  </executions>
+                 <configuration>
+                     <environmentVariables>
+                         <RE_BUILD_TYPE>${RE_BUILD_TYPE}</RE_BUILD_TYPE>
+                         <VERSION>1.0.0-SNAPSHOT</VERSION>
+                     </environmentVariables>
+                 </configuration>
              </plugin>
              <plugin>
                  <groupId>com.mycila</groupId>
@@ -128,6 +191,45 @@
                  </configuration>
              </plugin>
              <plugin>
+                 <artifactId>maven-clean-plugin</artifactId>
+                 <version>2.5</version>
+                 <executions>
+                     <execution>
+                         <id>default-clean</id>
+                         <phase>clean</phase>
+                         <goals>
+                             <goal>clean</goal>
+                         </goals>
+                     </execution>
+                 </executions>
+             </plugin>
+             <plugin>
+                 <artifactId>maven-install-plugin</artifactId>
+                 <version>2.4</version>
+                 <executions>
+                     <execution>
+                         <id>default-install</id>
+                         <phase>install</phase>
+                         <goals>
+                             <goal>install</goal>
+                         </goals>
+                     </execution>
+                 </executions>
+             </plugin>
+             <plugin>
+                 <artifactId>maven-deploy-plugin</artifactId>
+                 <version>2.7</version>
+                 <executions>
+                     <execution>
+                         <id>default-deploy</id>
+                         <phase>deploy</phase>
+                         <goals>
+                             <goal>deploy</goal>
+                         </goals>
+                     </execution>
+                 </executions>
+             </plugin>
+             <!--<plugin>
                  <groupId>io.fabric8</groupId>
                  <artifactId>docker-maven-plugin</artifactId>
                  <version>0.39.1</version>
@@ -155,7 +257,7 @@
                              <build>
                                  <dockerFileDir>.</dockerFileDir>
                                  <args>
-                                     <!-- Enable internet access -->
+                                     &lt;!&ndash; Enable internet access &ndash;&gt;
                                      <http_proxy>${env.HTTP_PROXY}</http_proxy>
                                      <https_proxy>${env.HTTPS_PROXY}</https_proxy>
                                      <no_proxy>${env.NO_PROXY}</no_proxy>
@@ -165,7 +267,7 @@
                      </images>
                      <verbose>true</verbose>
                  </configuration>
-             </plugin>
+             </plugin>-->
          </plugins>
      </build>
 
