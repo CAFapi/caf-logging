@@ -7,11 +7,12 @@ using System.Text.RegularExpressions;
 
 namespace caf_logging_serilog
 {
-    class SimpleClassEnricher : ILogEventEnricher
+    public class SimpleClassEnricher : ILogEventEnricher
     {
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
         {
-            //logEvent.AddOrUpdateProperty(propertyFactory.CreateProperty("CorrelationId", "correlsssation-custom"));
+            logEvent.AddOrUpdateProperty(propertyFactory.CreateProperty("CorrelationId", "correlation-custom"));
+            logEvent.AddOrUpdateProperty(propertyFactory.CreateProperty("TenantId", "tenantId-custom"));
         }
 
         

@@ -10,7 +10,15 @@ namespace caf_logging_serilog
         public static LoggerConfiguration GetLoggerConfig()
         {
             return new LoggerConfiguration()
-                .WriteTo.CustomConsoleConfiguration(writeTo => writeTo.Console(outputTemplate: DefaultTemplate));
+                .WriteTo.CustomConsoleConfiguration(writeTo => writeTo.Console(outputTemplate: DefaultTemplate))
+                //.Enrich.With(new SimpleClassEnricher())
+                .Enrich.FromLogContext()
+                .Enrich.WithThreadId()
+                .Enrich.WithThreadName()
+                .Enrich.WithProcessId()
+                .Enrich.WithProcessName()
+                .Enrich.WithCorrelationId()
+                ;
         }
     }
 }

@@ -32,7 +32,7 @@ namespace caf_logging_serilog
             // http://www.csc.villanova.edu/~tway/resources/ascii-table.html
             foreach (char c in message)
             {
-                if (Char.IsControl(c) && !Char.IsWhiteSpace(c))
+                if (Char.IsControl(c) )
                 {
                     Console.WriteLine("wrong character " + c);
                     return false;
