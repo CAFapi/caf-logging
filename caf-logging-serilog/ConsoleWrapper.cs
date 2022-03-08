@@ -40,22 +40,19 @@ namespace caf_logging_serilog
                 newMessageTemplate = parser.Parse(newMessage);
             }
 
-            foreach (KeyValuePair<string, LogEventPropertyValue> kvp in logEvent.Properties)
-            {
-                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
-            }
-
-
             LogEvent newLogEvent = new LogEvent(
                 logEvent.Timestamp,
                 logEvent.Level,
                 logEvent.Exception,
                 newMessageTemplate,
                 logEvent.Properties
-                    .Select(kvp => new LogEventProperty(kvp.Key, kvp.Value)));
+                    .Select(kvp => new LogEventProperty(kvp.Key, kvp.Value))
+            );
 
             _wrappedSink.Emit(newLogEvent);
         }
+
+
 
         public void Dispose()
         {

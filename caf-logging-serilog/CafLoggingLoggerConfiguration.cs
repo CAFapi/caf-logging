@@ -1,11 +1,12 @@
 ﻿
+using nuget_sample_caf_logging;
 using Serilog;
 
 namespace caf_logging_serilog
 {
     public static class CafLoggingLoggerConfiguration
     {
-        private const string DefaultTemplate = "[{Timestamp:yyyy-MM-dd HH:mm:ss} {ProcessId}.{ThreadId} {Level:u5} {TenantId} {CorrelationId}] [{SourceContext}] {Error} / {Message}{NewLine}{Exception}";
+        private const string DefaultTemplate = "[{Timestamp:yyyy-MM-dd HH:mm:ss} {ProcessId}.{ThreadId} {Level:u5} {tenantId} {correlationId:4}] {logger:30} / {Message}{Exception}";
 
         public static LoggerConfiguration GetLoggerConfig()
         {
@@ -17,6 +18,7 @@ namespace caf_logging_serilog
                 .Enrich.WithProcessId()
                 .Enrich.WithProcessName()
                 .Enrich.WithCorrelationId()
+                .Enrich.With(new SanitizingEnricher())
                 ;
         }
     }

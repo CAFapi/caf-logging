@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace caf_logging_serilog
 {
@@ -23,6 +21,7 @@ namespace caf_logging_serilog
             {
                 return true;
             }
+
             if (message.StartsWith("{"))
             {
                 return false;
@@ -32,9 +31,9 @@ namespace caf_logging_serilog
             // http://www.csc.villanova.edu/~tway/resources/ascii-table.html
             foreach (char c in message)
             {
+                Console.WriteLine("wrong character " + c);
                 if (Char.IsControl(c))
                 {
-                    // Console.WriteLine("wrong character " + c);
                     return false;
                 }
             }

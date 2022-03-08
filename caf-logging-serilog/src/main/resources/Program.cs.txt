@@ -1,0 +1,37 @@
+using Serilog;
+using Serilog.Core;
+using caf_logging_serilog;
+using Serilog.Context;
+
+
+/* This file is for testing purpose only and should be removed. In order to use it, it's required to create a new
+console Application alongside the caf-logging-serilog library with a dependency on it, then use the present content inside a Program.cs
+class. That console App project must be used as a startup project. */
+namespace SerilogExample
+{
+    public class ProgramDermot
+    {
+        public static void MainD()
+        {
+            //Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateLogger();
+            Log.Logger = CafLoggingLoggerConfiguration.GetLoggerConfig().CreateLogger();
+
+
+            MainFunction("acme-corp", "abcdef");
+        }
+
+        private static void MainFunction(string tenantId, string correlationId)
+        {
+            using (LogContext.PushProperty("tenantId", tenantId))
+            using (LogContext.PushProperty("correlationId", correlationId))
+            {
+                MainLogic();
+            }
+        }
+
+        private static void MainLogic()
+        {
+            Log.Information("Hello World!");
+        }
+    }
+}
