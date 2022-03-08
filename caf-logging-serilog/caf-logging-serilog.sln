@@ -5,8 +5,6 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "caf-logging-serilog", "caf-logging-serilog.csproj", "{540E19A9-A196-4BFC-8F92-7F55608726F0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "caf-logging-serilog-tests", "..\..\caf-logging-serilog-tests\caf-logging-serilog-tests.csproj", "{AA47FA16-AF0F-49F8-AE97-8C958B916B81}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{540E19A9-A196-4BFC-8F92-7F55608726F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{540E19A9-A196-4BFC-8F92-7F55608726F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{540E19A9-A196-4BFC-8F92-7F55608726F0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AA47FA16-AF0F-49F8-AE97-8C958B916B81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AA47FA16-AF0F-49F8-AE97-8C958B916B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AA47FA16-AF0F-49F8-AE97-8C958B916B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AA47FA16-AF0F-49F8-AE97-8C958B916B81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
