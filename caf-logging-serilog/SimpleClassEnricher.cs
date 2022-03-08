@@ -8,7 +8,7 @@ namespace nuget_sample_caf_logging
 {
     public class SanitizingEnricher : ILogEventEnricher
     {
-        readonly string[] propertiesToCheck = new string[] { "tenantId", "correlationId", "logger" };
+        private readonly static string[] propertiesToCheck = new string[] { "tenantId", "correlationId", "logger" };
 
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
         {

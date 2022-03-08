@@ -23,7 +23,7 @@ namespace caf_logging_serilog
         {
 
             MessageTemplate newMessageTemplate;
-            string messageReceived = logEvent.MessageTemplate.Text;
+            var messageReceived = logEvent.MessageTemplate.Text;
 
             if (null == logEvent.Exception && LogSanitizer.IsMessageSafeToLog(messageReceived))
             {
@@ -36,11 +36,11 @@ namespace caf_logging_serilog
                     message = messageReceived,
                     Exception = logEvent.Exception
                 };
-                string newMessage = JsonConvert.SerializeObject(exceptionItem);
+                var newMessage = JsonConvert.SerializeObject(exceptionItem);
                 newMessageTemplate = parser.Parse(newMessage);
             }
 
-            LogEvent newLogEvent = new LogEvent(
+            var newLogEvent = new LogEvent(
                 logEvent.Timestamp,
                 logEvent.Level,
                 logEvent.Exception,

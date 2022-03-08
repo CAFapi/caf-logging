@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace caf_logging_serilog
 {
     public static class LogSanitizer
     {
-        readonly static Char[] forbiddenCharacters = new char[] { '[', '^', '\\', 'w', ' ', '-', '.', ']' };
+        private const string ForbiddenPattern = "[^\\w\\s\\-.]*";
+        private readonly static Regex rgx = new Regex(ForbiddenPattern);
 
         public static string SanitizeMessage(string message)
         {
-            return new string(message
-              .Where(x => !forbiddenCharacters.Contains(x))
-              .ToArray());
+            return rgx.Replace(message, "");
         }
 
 
@@ -31,7 +31,6 @@ namespace caf_logging_serilog
             // http://www.csc.villanova.edu/~tway/resources/ascii-table.html
             foreach (char c in message)
             {
-                Console.WriteLine("wrong character " + c);
                 if (Char.IsControl(c))
                 {
                     return false;
