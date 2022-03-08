@@ -7,7 +7,7 @@ namespace caf_logging_serilog
 {
     static class LoggerSinkConfigurationExtensions
     {
-        
+
         public static LoggerConfiguration CustomConsoleConfiguration(
             this LoggerSinkConfiguration lsc,
             Action<LoggerSinkConfiguration> writeTo)

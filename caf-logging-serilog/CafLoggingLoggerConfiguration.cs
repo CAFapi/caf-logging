@@ -11,7 +11,6 @@ namespace caf_logging_serilog
         {
             return new LoggerConfiguration()
                 .WriteTo.CustomConsoleConfiguration(writeTo => writeTo.Console(outputTemplate: DefaultTemplate))
-                //.Enrich.With(new SimpleClassEnricher())
                 .Enrich.FromLogContext()
                 .Enrich.WithThreadId()
                 .Enrich.WithThreadName()
