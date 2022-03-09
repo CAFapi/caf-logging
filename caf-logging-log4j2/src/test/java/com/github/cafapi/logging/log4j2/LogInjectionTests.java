@@ -21,8 +21,6 @@ import java.io.PrintStream;
 import java.nio.ByteBuffer;
 import java.nio.charset.CharacterCodingException;
 import java.nio.charset.StandardCharsets;
-import java.util.stream.IntStream;
-
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -34,7 +32,7 @@ import org.apache.logging.log4j.ThreadContext;
 
 public class LogInjectionTests
 {
-    // @Test
+    //@Test
     public void testLogMessageWithNewline() throws Exception
     {
         // Use tenant and correlation ids that have newlines in them
@@ -57,11 +55,6 @@ public class LogInjectionTests
         // Read the log into a string
         final String log = utf8Decode(logStream);
         final long logLineCount = countLines(log);
-
-        System.out.println("log " + log);
-        String sd = "\n";
-        IntStream df = sd.chars();
-        System.out.println("lb " + df.findFirst().getAsInt());
 
         // Assert that the message lines are in the log
         Assert.assertThat(log, containsString(messageLine1));

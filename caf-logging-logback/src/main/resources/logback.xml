@@ -26,6 +26,7 @@
     <include optional="true" resource="includedLogback.xml" />
 
     <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.err</target>
         <encoder> 
             <pattern>
                 [%date{yyyy-MM-dd HH:mm:ss.SSS,UTC}Z %pidtid %-5level %-12.-12sanitize(%mdc{tenantId:--}) %-4.-4sanitize(%mdc{correlationId:--})] %sanitize(%logger{30}):${patternExtension:- }%maybeJsonMsgAndEx%n

@@ -46,7 +46,7 @@ public class LogInjectionTests
 
         // Log the messages
         final ByteArrayOutputStream logStream = new ByteArrayOutputStream();
-        try (final StdOutRedirector redirector = new StdOutRedirector(logStream)) {
+        try (final StdErrRedirector redirector = new StdErrRedirector(logStream)) {
             final Logger logger = LoggerFactory.getLogger("LogInjection\nTests");
             logger.info(combinedMessageLine);
             logger.info("There are {} green bottles sitting on the wall.", 10);
@@ -83,7 +83,7 @@ public class LogInjectionTests
 
         // Log the exception
         final ByteArrayOutputStream logStream = new ByteArrayOutputStream();
-        try (final StdOutRedirector redirector = new StdOutRedirector(logStream)) {
+        try (final StdErrRedirector redirector = new StdErrRedirector(logStream)) {
             final Logger logger = LoggerFactory.getLogger("LogInjectionTests");
 
             try {
@@ -107,21 +107,21 @@ public class LogInjectionTests
         Assert.assertThat(logLineCount, is(1L));
     }
 
-    private static final class StdOutRedirector implements AutoCloseable
+    private static final class StdErrRedirector implements AutoCloseable
     {
-        private final PrintStream originalStdOut;
+        private final PrintStream originalErrOut;
 
-        public StdOutRedirector(final OutputStream out)
+        public StdErrRedirector(final OutputStream out)
         {
-            this.originalStdOut = System.out;
-            System.setOut(new PrintStream(out));
+            this.originalErrOut = System.err;
+            System.setErr(new PrintStream(out));
         }
 
         @Override
         public void close()
         {
             System.out.flush();
-            System.setOut(originalStdOut);
+            System.setOut(originalErrOut);
         }
     }
 
