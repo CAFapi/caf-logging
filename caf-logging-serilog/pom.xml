@@ -33,7 +33,6 @@
 
     <properties>
         <nugetOutputFolder>${project.build.directory}</nugetOutputFolder>
-        <maven.install.skip>true</maven.install.skip>
     </properties>
 
     <build>
