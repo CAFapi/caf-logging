@@ -18,7 +18,7 @@ using Serilog.Configuration;
 using Serilog.Events;
 using System;
 
-namespace caf_logging_serilog
+namespace MicroFocus.CafApi.CafLoggingSerilog
 {
     static class LoggerSinkConfigurationExtensions
     {

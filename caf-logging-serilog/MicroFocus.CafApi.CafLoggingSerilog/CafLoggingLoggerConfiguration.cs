@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-﻿
-using nuget_sample_caf_logging;
+
 using Serilog;
 
-namespace caf_logging_serilog
+namespace MicroFocus.CafApi.CafLoggingSerilog
 {
     public static class CafLoggingLoggerConfiguration
     {

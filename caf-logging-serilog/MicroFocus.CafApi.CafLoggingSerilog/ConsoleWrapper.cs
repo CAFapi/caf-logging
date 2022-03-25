@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 ﻿using Newtonsoft.Json;
-using nuget_sample_caf_logging;
+using MicroFocus.CafApi.CafLoggingSerilog;
 using Serilog.Core;
 using Serilog.Events;
 using Serilog.Parsing;
@@ -22,7 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace caf_logging_serilog
+namespace MicroFocus.CafApi.CafLoggingSerilog
 {
     public class ConsoleWrapper : ILogEventSink, IDisposable
     {

@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 using Serilog;
-using caf_logging_serilog;
 using Serilog.Context;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

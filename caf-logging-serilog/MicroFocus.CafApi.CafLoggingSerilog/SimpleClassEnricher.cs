@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-﻿using caf_logging_serilog;
 using Serilog.Core;
 using Serilog.Events;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace nuget_sample_caf_logging
+namespace MicroFocus.CafApi.CafLoggingSerilog
 {
     public class SanitizingEnricher : ILogEventEnricher
     {
