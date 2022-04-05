@@ -22,6 +22,4 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
         public Exception Exception { get; set; }
         public string message { get; set; }
     }
-
-
 }

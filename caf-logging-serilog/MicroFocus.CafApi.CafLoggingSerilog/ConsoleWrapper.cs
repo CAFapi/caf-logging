@@ -67,13 +67,9 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
             _wrappedSink.Emit(newLogEvent);
         }
 
-
-
         public void Dispose()
         {
             (_wrappedSink as IDisposable)?.Dispose();
         }
-
-
     }
 }

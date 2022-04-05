@@ -22,7 +22,6 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
 {
     static class LoggerSinkConfigurationExtensions
     {
-
         public static LoggerConfiguration CustomConsoleConfiguration(
             this LoggerSinkConfiguration lsc,
             Action<LoggerSinkConfiguration> writeTo)

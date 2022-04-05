@@ -32,8 +32,7 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
                 .Enrich.WithProcessId()
                 .Enrich.WithProcessName()
                 .Enrich.WithCorrelationId()
-                .Enrich.With(new SanitizingEnricher())
-                ;
+                .Enrich.With(new SanitizingEnricher());
         }
     }
 }

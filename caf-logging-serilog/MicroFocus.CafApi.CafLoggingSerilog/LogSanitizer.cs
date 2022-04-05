@@ -29,7 +29,6 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
             return rgx.Replace(message, "");
         }
 
-
         public static bool IsMessageSafeToLog(string message)
         {
             if (string.IsNullOrWhiteSpace(message))
