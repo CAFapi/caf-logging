@@ -30,6 +30,9 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
             {
                 if (propertiesToCheck.Any(kvp.Key.Contains))
                 {
+                    // TODO
+                    // check for NullPointerException
+                    // .StringIndexOutOfBoundsException
                     var value = kvp.Value.ToString();
                     var trimmedValue = value.Substring(1, value.Length - 2);
 
