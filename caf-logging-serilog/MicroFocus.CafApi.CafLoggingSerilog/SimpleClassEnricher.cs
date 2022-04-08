@@ -30,13 +30,17 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
             {
                 if (propertiesToCheck.Any(kvp.Key.Contains))
                 {
-                    // TODO
-                    // check for NullPointerException
-                    // .StringIndexOutOfBoundsException
-                    var value = kvp.Value.ToString();
-                    var trimmedValue = value.Substring(1, value.Length - 2);
+                    // We expect a json type string here
+                    // We want to check if it has any content
+                    // Then remove the brackets
+                    if (null != kvp.Value && kvp.Value.ToString().Length > 1)
+                    {
+                        var value = kvp.Value.ToString();
+                        var trimmedValue = value.Substring(1, value.Length - 2);
 
-                    logEvent.AddOrUpdateProperty(propertyFactory.CreateProperty(kvp.Key, LogSanitizer.SanitizeMessage(trimmedValue)));
+                        logEvent.AddOrUpdateProperty(propertyFactory.CreateProperty(kvp.Key, LogSanitizer.SanitizeMessage(trimmedValue)));
+                    }
+
                 }
             }
         }
