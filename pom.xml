@@ -74,7 +74,7 @@
     <properties>
         <copyrightYear>2020</copyrightYear>
         <enforceCorrectDependencies>true</enforceCorrectDependencies>
-        <logbackVersion>1.2.3</logbackVersion>
+        <logbackVersion>1.2.9</logbackVersion>
     </properties>
 
     <dependencyManagement>
