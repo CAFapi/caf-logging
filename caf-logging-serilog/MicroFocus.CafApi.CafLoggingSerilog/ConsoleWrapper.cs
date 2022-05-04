@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 ﻿using Newtonsoft.Json;
-using MicroFocus.CafApi.CafLoggingSerilog;
 using Serilog.Core;
 using Serilog.Events;
 using Serilog.Parsing;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace MicroFocus.CafApi.CafLoggingSerilog
@@ -36,10 +34,8 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
 
         public void Emit(LogEvent logEvent)
         {
-
             MessageTemplate newMessageTemplate;
             var messageReceived = logEvent.MessageTemplate.Text;
-
             if (null == logEvent.Exception && LogSanitizer.IsMessageSafeToLog(messageReceived))
             {
                 newMessageTemplate = parser.Parse(messageReceived);
@@ -48,13 +44,12 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
             {
                 LogExceptionItem exceptionItem = new LogExceptionItem()
                 {
-                    message = messageReceived,
-                    Exception = logEvent.Exception
+                    Exception = new Exception(messageReceived)
                 };
                 var newMessage = JsonConvert.SerializeObject(exceptionItem);
                 newMessageTemplate = parser.Parse(newMessage);
             }
-
+            Console.WriteLine("loglevel " + logEvent.Level);
             var newLogEvent = new LogEvent(
                 logEvent.Timestamp,
                 logEvent.Level,

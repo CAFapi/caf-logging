@@ -28,6 +28,7 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
         {
             foreach (KeyValuePair<string, LogEventPropertyValue> kvp in logEvent.Properties)
             {
+
                 if (propertiesToCheck.Any(kvp.Key.Contains))
                 {
                     // We expect a json type string here
@@ -40,6 +41,8 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
 
                         logEvent.AddOrUpdateProperty(propertyFactory.CreateProperty(kvp.Key, LogSanitizer.SanitizeMessage(trimmedValue)));
                     }
+
+                    
 
                 }
             }

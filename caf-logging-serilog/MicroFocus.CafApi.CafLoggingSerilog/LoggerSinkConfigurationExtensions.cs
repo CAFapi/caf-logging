@@ -15,6 +15,7 @@
  */
 ﻿using Serilog;
 using Serilog.Configuration;
+using Serilog.Core;
 using Serilog.Events;
 using System;
 
@@ -24,14 +25,15 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
     {
         public static LoggerConfiguration CustomConsoleConfiguration(
             this LoggerSinkConfiguration lsc,
-            Action<LoggerSinkConfiguration> writeTo)
+            Action<LoggerSinkConfiguration> writeTo,
+            LoggingLevelSwitch levelSwitch)
         {
             return LoggerSinkConfiguration.Wrap(
                 lsc,
                 wrapped => new ConsoleWrapper(wrapped),
                 writeTo,
-                LogEventLevel.Error,
-                null);
+                LogEventLevel.Information,
+                levelSwitch);
         }
     }
 }
