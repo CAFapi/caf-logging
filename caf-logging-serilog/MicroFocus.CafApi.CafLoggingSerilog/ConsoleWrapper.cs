@@ -19,6 +19,7 @@ using Serilog.Events;
 using Serilog.Parsing;
 using System;
 using System.Linq;
+using nuget_sample_caf_logging.MicroFocus.CafApi.CafLoggingSerilog;
 
 namespace MicroFocus.CafApi.CafLoggingSerilog
 {
@@ -36,20 +37,30 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
         {
             MessageTemplate newMessageTemplate;
             var messageReceived = logEvent.MessageTemplate.Text;
-            if (null == logEvent.Exception && LogSanitizer.IsMessageSafeToLog(messageReceived))
+            var exception = logEvent.Exception;
+            if (null == exception && LogSanitizer.IsMessageSafeToLog(messageReceived))
             {
                 newMessageTemplate = parser.Parse(messageReceived);
             }
             else
             {
-                LogExceptionItem exceptionItem = new LogExceptionItem()
+                string newMessage = "";
+                
+                
+                if (null != exception)
                 {
-                    Exception = new Exception(messageReceived)
-                };
-                var newMessage = JsonConvert.SerializeObject(exceptionItem);
+                    
+                    var sanitizedMessage = new SanitizedException(exception, messageReceived);
+                    newMessage = JsonConvert.SerializeObject(sanitizedMessage);
+                }
+                else
+                {
+                    newMessage = JsonConvert.SerializeObject(new SanitizedMessage(messageReceived));
+                }
+
                 newMessageTemplate = parser.Parse(newMessage);
             }
-            Console.WriteLine("loglevel " + logEvent.Level);
+            //Console.WriteLine("loglevel " + logEvent.Level);
             var newLogEvent = new LogEvent(
                 logEvent.Timestamp,
                 logEvent.Level,
@@ -61,6 +72,8 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
 
             _wrappedSink.Emit(newLogEvent);
         }
+
+        
 
         public void Dispose()
         {

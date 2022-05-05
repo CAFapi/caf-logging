@@ -15,13 +15,12 @@
  */
 using Serilog;
 using Serilog.Core;
-using Serilog.Events;
 
 namespace MicroFocus.CafApi.CafLoggingSerilog
 {
     public static class CafLoggingLoggerConfiguration
     {
-        private const string DefaultTemplate = "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}{UTC} {ProcessId}.{ThreadId} {Level:u5} {tenantId} {correlationId:4}] {logger:30} {Message}{Exception}{NewLine}";
+        private const string DefaultTemplate = "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}{UTC} {ProcessId}{ThreadId} {Level:u4} {tenantId} {correlationId:4}] {logger:30} {Message}{Exception}{NewLine}";
 
         public static LoggerConfiguration GetLoggerConfig(LoggingLevelSwitch levelSwitch)
         {
