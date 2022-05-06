@@ -13,17 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-﻿using System;
 
 namespace nuget_sample_caf_logging.MicroFocus.CafApi.CafLoggingSerilog
 {
     class SanitizedMessage
     {
+        public string message;
+        public string exception;
+
         public SanitizedMessage(string message)
         {
             this.message = message;
         }
+        public SanitizedMessage(string message, string exception)
+        {
+            this.message = message;
+            this.exception = exception;
+        }
 
-        public string message;
+        
     }
 }

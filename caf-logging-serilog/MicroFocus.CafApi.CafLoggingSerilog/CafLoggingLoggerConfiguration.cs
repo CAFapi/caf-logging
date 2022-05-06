@@ -22,34 +22,30 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
 {
     public static class CafLoggingLoggerConfiguration
     {
-        private const string DefaultTemplate = "[{UtcTimestamp::yyyy-MM-dd HH:mm:ss.fff zzzZ} {ProcessId}.{ThreadId} {Log(@l):5} {tenantId} {correlationId:4}] {logger:30} {Sanitize(@m)}{Sanitize(@x)}\n";
-        
+        private const string DefaultTemplate = "[{@t:yyyy-MM-dd HH:mm:ss.fffZ} {TId(ProcessId,ThreadId)} {Log(@l):5} {Sanitize(tenantId)} {Sanitize(correlationId)}] {logger:30} {MaybeJsonMsgAndEx(@m,@x)}\n";
+        private static readonly StaticMemberNameResolver sanitizerFunctions = new(typeof(Sanitizer));
         public static LoggerConfiguration GetLoggerConfig(LoggingLevelSwitch levelSwitch)
         {
-            var sanitizerFunctions = new StaticMemberNameResolver(typeof(Sanitizer));
+            
             return new LoggerConfiguration()
-                .WriteTo.CustomConsoleConfiguration(writeTo => writeTo.Console(new ExpressionTemplate(
-        DefaultTemplate,
-        nameResolver: sanitizerFunctions)), levelSwitch)
+                .WriteTo.Console(new ExpressionTemplate(
+        DefaultTemplate, nameResolver: sanitizerFunctions), levelSwitch: levelSwitch)
                 .Enrich.FromLogContext()
                 .Enrich.WithThreadId()
-                .Enrich.WithThreadName()
                 .Enrich.WithProcessId()
-                .Enrich.WithProcessName()
                 .MinimumLevel.Verbose()
-                .Enrich.With(new SanitizingEnricher());
+                ;
         }
         public static LoggerConfiguration GetLoggerConfig()
         {
             return new LoggerConfiguration()
-                .WriteTo.CustomConsoleConfiguration(writeTo => writeTo.Console(outputTemplate: DefaultTemplate), null)
+                .WriteTo.Console(new ExpressionTemplate(
+        DefaultTemplate, nameResolver: sanitizerFunctions))
                 .Enrich.FromLogContext()
                 .Enrich.WithThreadId()
-                .Enrich.WithThreadName()
                 .Enrich.WithProcessId()
-                .Enrich.WithProcessName()
                 .MinimumLevel.Verbose()
-                .Enrich.With(new SanitizingEnricher());
+                ;
         }
 
     }
