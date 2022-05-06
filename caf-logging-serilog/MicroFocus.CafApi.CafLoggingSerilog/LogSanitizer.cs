@@ -47,7 +47,7 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
             {
                 if (Char.IsControl(c))
                 {
-                    return false;
+                    return true;
                 }
             }
             return true;

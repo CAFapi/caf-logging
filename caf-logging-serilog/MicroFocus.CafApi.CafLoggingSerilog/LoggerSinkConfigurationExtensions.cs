@@ -32,7 +32,7 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
                 lsc,
                 wrapped => new ConsoleWrapper(wrapped),
                 writeTo,
-                LogEventLevel.Information,
+                LogEventLevel.Verbose,
                 levelSwitch);
         }
     }

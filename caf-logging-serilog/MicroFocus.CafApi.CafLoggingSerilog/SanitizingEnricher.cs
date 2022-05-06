@@ -13,8 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+using Serilog.Context;
 using Serilog.Core;
 using Serilog.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -38,14 +40,44 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
                     {
                         var value = kvp.Value.ToString();
                         var trimmedValue = value.Substring(1, value.Length - 2);
-
+                      
                         logEvent.AddOrUpdateProperty(propertyFactory.CreateProperty(kvp.Key, LogSanitizer.SanitizeMessage(trimmedValue)));
                     }
-
-                    
-
                 }
             }
+            logEvent.AddPropertyIfAbsent(
+                    propertyFactory.CreateProperty("UtcTimestamp", logEvent.Timestamp.UtcDateTime));
+            FormatLogLevel(logEvent, propertyFactory);
+
+        }
+
+        private static void FormatLogLevel(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
+        {
+            var newLevelValue = "INFO";
+            switch (logEvent.Level)
+            {
+                case LogEventLevel.Verbose:
+                    newLevelValue = "VERBOSE";
+                    break;
+                case LogEventLevel.Debug:
+                    newLevelValue = "DEBUG";
+                    break;
+                case LogEventLevel.Information:
+                    newLevelValue = "INFO";
+                    break;
+                case LogEventLevel.Warning:
+                    newLevelValue = "WARN";
+                    break;
+                case LogEventLevel.Error:
+                    newLevelValue = "ERROR";
+                    break;
+                default:
+                    newLevelValue = "FATAL";
+                    break;
+            }
+            logEvent.AddOrUpdateProperty(
+                propertyFactory.CreateProperty("newLevel", newLevelValue)
+            );
         }
     }
 }

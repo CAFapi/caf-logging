@@ -15,17 +15,22 @@
  */
 using Serilog;
 using Serilog.Core;
+using Serilog.Expressions;
+using Serilog.Templates;
 
 namespace MicroFocus.CafApi.CafLoggingSerilog
 {
     public static class CafLoggingLoggerConfiguration
     {
-        private const string DefaultTemplate = "[{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz}{UTC} {ProcessId}{ThreadId} {Level:u4} {tenantId} {correlationId:4}] {logger:30} {Message}{Exception}{NewLine}";
-
+        private const string DefaultTemplate = "[{UtcTimestamp::yyyy-MM-dd HH:mm:ss.fff zzzZ} {ProcessId}.{ThreadId} {Log(@l):5} {tenantId} {correlationId:4}] {logger:30} {Sanitize(@m)}{Sanitize(@x)}\n";
+        
         public static LoggerConfiguration GetLoggerConfig(LoggingLevelSwitch levelSwitch)
         {
+            var sanitizerFunctions = new StaticMemberNameResolver(typeof(Sanitizer));
             return new LoggerConfiguration()
-                .WriteTo.CustomConsoleConfiguration(writeTo => writeTo.Console(outputTemplate: DefaultTemplate), levelSwitch)
+                .WriteTo.CustomConsoleConfiguration(writeTo => writeTo.Console(new ExpressionTemplate(
+        DefaultTemplate,
+        nameResolver: sanitizerFunctions)), levelSwitch)
                 .Enrich.FromLogContext()
                 .Enrich.WithThreadId()
                 .Enrich.WithThreadName()
