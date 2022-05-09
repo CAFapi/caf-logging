@@ -31,6 +31,5 @@ namespace nuget_sample_caf_logging.MicroFocus.CafApi.CafLoggingSerilog
             this.exception = exception;
         }
 
-        
     }
 }

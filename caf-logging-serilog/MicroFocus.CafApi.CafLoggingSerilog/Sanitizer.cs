@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using nuget_sample_caf_logging.MicroFocus.CafApi.CafLoggingSerilog;
 using Serilog.Events;
-using System;
 using System.Text.RegularExpressions;
 
 namespace MicroFocus.CafApi.CafLoggingSerilog
@@ -9,7 +8,7 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
     static class Sanitizer
     {
         private const string ForbiddenPattern = "[^\\w\\s\\-.]*";
-        private readonly static Regex rgx = new Regex(ForbiddenPattern);
+        private readonly static Regex rgx = new(ForbiddenPattern);
 
         public static LogEventPropertyValue? Log(LogEventPropertyValue? value)
         {
@@ -29,7 +28,7 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
             return null;
         }
 
-        public static LogEventPropertyValue? TId(LogEventPropertyValue? processId, LogEventPropertyValue? ThreadId)
+        public static LogEventPropertyValue? Tid(LogEventPropertyValue? processId, LogEventPropertyValue? ThreadId)
         {
             if (processId is ScalarValue && ThreadId is ScalarValue)
             {
@@ -92,7 +91,7 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
             // http://www.csc.villanova.edu/~tway/resources/ascii-table.html
             foreach (char c in message)
             {
-                if (Char.IsControl(c))
+                if (char.IsControl(c))
                 {
                     return true;
                 }
