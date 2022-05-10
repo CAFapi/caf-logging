@@ -31,13 +31,13 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
             if (value is ScalarValue)
             {
                 var level = value.ToString();
-                switch (level) {
+                switch (level)
+                {
                     case "Information":
                     case "Warning":
                         return new ScalarValue(level.ToUpper().Substring(0, 4).PadRight(5, ' '));
                     default:
                         return new ScalarValue(level.ToUpper().Substring(0, 5));
-
                 }
             }
 
@@ -61,21 +61,23 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
 
             if (value is ScalarValue)
             {
-                int l, p;
+                int valueLength, valuePadding;
                 try
                 {
-                    l = Convert.ToInt32(length.ToString());
-                    p = Convert.ToInt32(padding.ToString());
+                    valueLength = Convert.ToInt32(length.ToString());
+                    valuePadding = Convert.ToInt32(padding.ToString());
                 }
-                catch (FormatException) {
-                    l = 4;
-                    p = 4;
-;                }
+                catch (FormatException)
+                {
+                    valueLength = 4;
+                    valuePadding = 4;
+                }
                 var newValue = rgx.Replace(value.ToString(), "");
-                if (l <= newValue.Length) {
-                    newValue = newValue.Substring(0, l);
+                if (valueLength <= newValue.Length)
+                {
+                    newValue = newValue.Substring(0, valueLength);
                 }
-                newValue = newValue.PadRight(p, ' ');
+                newValue = newValue.PadRight(valuePadding, ' ');
                 return new ScalarValue(newValue);
 
             }
@@ -91,15 +93,16 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
                 var message = messageValue.ToString();
                 if (IsMessageSafeToLog(message) && null == exceptionValue)
                 {
-                    Console.WriteLine("is safe");
                     return new ScalarValue(message);
                 }
-                else {
+                else 
+                {
                     if (null != exceptionValue)
                     {
                         var exception = exceptionValue.ToString();
                         return new ScalarValue(JsonConvert.SerializeObject(new SanitizedMessage(message, exception)));
-                    } else
+                    } 
+                    else
                     {
                         return new ScalarValue(JsonConvert.SerializeObject(new SanitizedMessage(message)));
                     }
@@ -108,7 +111,7 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
             return null;
         }
 
-        public static bool IsMessageSafeToLog(string message)
+        private static bool IsMessageSafeToLog(string message)
         {
             if (string.IsNullOrWhiteSpace(message))
             {
@@ -131,6 +134,5 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
             }
             return true;
         }
-
     }
 }

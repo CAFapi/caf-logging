@@ -23,7 +23,7 @@ Add the nuget package `MicroFocus.CafApi.CafLoggingSerilog`
 
 `[{@t:yyyy-MM-dd HH:mm:ss.fffZ} {Tid(ProcessId,ThreadId)} {Log(@l):5} {Sanitize(tenantId, 12, 12)} {Sanitize(correlationId, 4, 4)}] {Sanitize(logger, 30, 30)}: {MaybeJsonMsgAndEx(@m,@x)}\n`
 
-## Example
+## Examples
 
 `[2022-05-10 13:29:45.444Z #217.001 WARN  john-tenant  Cidi] c.m.d.f.f.f.FieldFullTextFixer: "Greek test: κόσμε"`
 

@@ -27,7 +27,7 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
 
         private static readonly StaticMemberNameResolver sanitizerFunctions = new(typeof(Sanitizer));
 
-        public static LoggerConfiguration GetLoggerConfig()
+        public static LoggerConfiguration CreateLogConfiguration()
         {
             return new LoggerConfiguration()
                 .WriteTo.Console(
@@ -39,13 +39,11 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
                 .Enrich.FromLogContext()
                 .Enrich.WithThreadId()
                 .Enrich.WithProcessId()
-                .MinimumLevel.Verbose()
-                ;
+                .MinimumLevel.Verbose();
         }
 
-        public static LoggerConfiguration GetLoggerConfig(LoggingLevelSwitch levelSwitch)
-        {
-            
+        public static LoggerConfiguration CreateLogConfiguration(LoggingLevelSwitch levelSwitch)
+        { 
             return new LoggerConfiguration()
                 .WriteTo.Console(
                     new ExpressionTemplate(
@@ -57,9 +55,7 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
                 .Enrich.FromLogContext()
                 .Enrich.WithThreadId()
                 .Enrich.WithProcessId()
-                .MinimumLevel.Verbose()
-                ;
-        } 
-
+                .MinimumLevel.Verbose();
+        }
     }
 }
