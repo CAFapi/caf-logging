@@ -23,7 +23,7 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
 {
     public static class CafLoggingLoggerConfiguration
     {
-        private const string DefaultTemplate = "[{@t:yyyy-MM-dd HH:mm:ss.fffZ} {Tid(ProcessId,ThreadId)} {Log(@l):5} {Sanitize(tenantId)} {Sanitize(correlationId)}] {logger:30} {MaybeJsonMsgAndEx(@m,@x)}\n";
+        private const string DefaultTemplate = "[{@t:yyyy-MM-dd HH:mm:ss.fffZ} {Tid(ProcessId,ThreadId)} {Log(@l):5} {Sanitize(tenantId, 12, 12)} {Sanitize(correlationId, 4, 4)}] {Sanitize(logger, 30, 30)}: {MaybeJsonMsgAndEx(@m,@x)}\n";
         private static readonly StaticMemberNameResolver sanitizerFunctions = new(typeof(Sanitizer));
         public static LoggerConfiguration GetLoggerConfig(LoggingLevelSwitch levelSwitch)
         {
@@ -42,14 +42,58 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
                 .MinimumLevel.Verbose()
                 ;
         }
+        public static LoggerConfiguration GetLoggerConfig(LoggingLevelSwitch levelSwitch, string path)
+        {
+
+            return new LoggerConfiguration()
+                .WriteTo.Console(
+                    new ExpressionTemplate(
+                        DefaultTemplate,
+                        nameResolver: sanitizerFunctions),              // References the functions used in the default template
+                        levelSwitch: levelSwitch,                       // Overrides the log level
+                        standardErrorFromLevel: LogEventLevel.Verbose   // Redirects the logs to stderr
+                    )
+                .WriteTo.File(new ExpressionTemplate(
+                        DefaultTemplate,
+                        nameResolver: sanitizerFunctions), path,        // References the functions used in the default template
+                        levelSwitch: levelSwitch
+                )
+                .Enrich.FromLogContext()
+                .Enrich.WithThreadId()
+                .Enrich.WithProcessId()
+                .MinimumLevel.Verbose()
+                ;
+        }
         public static LoggerConfiguration GetLoggerConfig()
         {
             return new LoggerConfiguration()
-                .WriteTo.Console(new ExpressionTemplate(
+                .WriteTo.Console(
+                    new ExpressionTemplate(
                         DefaultTemplate,
                         nameResolver: sanitizerFunctions),              // References the functions used in the default template
                         standardErrorFromLevel: LogEventLevel.Verbose   // Redirects the logs to stderr
                     )
+                .Enrich.FromLogContext()
+                .Enrich.WithThreadId()
+                .Enrich.WithProcessId()
+                .MinimumLevel.Verbose()
+                ;
+        }
+
+        public static LoggerConfiguration GetLoggerConfig(string path)
+        {
+            return new LoggerConfiguration()
+                .WriteTo.Console(
+                    new ExpressionTemplate(
+                        DefaultTemplate,
+                        nameResolver: sanitizerFunctions),              // References the functions used in the default template
+                        standardErrorFromLevel: LogEventLevel.Verbose   // Redirects the logs to stderr
+                    )
+                .WriteTo.File(new ExpressionTemplate(
+                        DefaultTemplate,
+                        nameResolver: sanitizerFunctions),              // References the functions used in the default template
+                        path
+                )
                 .Enrich.FromLogContext()
                 .Enrich.WithThreadId()
                 .Enrich.WithProcessId()

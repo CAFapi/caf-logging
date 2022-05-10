@@ -16,6 +16,7 @@
 ﻿using Newtonsoft.Json;
 using nuget_sample_caf_logging.MicroFocus.CafApi.CafLoggingSerilog;
 using Serilog.Events;
+using System;
 using System.Text.RegularExpressions;
 
 namespace MicroFocus.CafApi.CafLoggingSerilog
@@ -48,19 +49,35 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
             if (processId is ScalarValue && ThreadId is ScalarValue)
             {
                 var threadId = ThreadId.ToString();
-                return new ScalarValue("#" + processId + "." + threadId.PadLeft(3, '0'));
+                return new ScalarValue("#" + processId.ToString().Substring(0, 3) + "." + threadId.PadLeft(3, '0'));
             }
 
             return null;
         }
 
-        public static LogEventPropertyValue? Sanitize(LogEventPropertyValue? value)
+
+        public static LogEventPropertyValue? Sanitize(LogEventPropertyValue? value, LogEventPropertyValue? length, LogEventPropertyValue? padding)
         {
 
             if (value is ScalarValue)
             {
-                var newValue = rgx.Replace(value.ToString(), "").PadRight(4, ' ');
+                int l, p;
+                try
+                {
+                    l = Convert.ToInt32(length.ToString());
+                    p = Convert.ToInt32(padding.ToString());
+                }
+                catch (FormatException) {
+                    l = 4;
+                    p = 4;
+;                }
+                var newValue = rgx.Replace(value.ToString(), "");
+                if (l <= newValue.Length) {
+                    newValue = newValue.Substring(0, l);
+                }
+                newValue = newValue.PadRight(p, ' ');
                 return new ScalarValue(newValue);
+
             }
 
             return null;
@@ -74,6 +91,7 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
                 var message = messageValue.ToString();
                 if (IsMessageSafeToLog(message) && null == exceptionValue)
                 {
+                    Console.WriteLine("is safe");
                     return new ScalarValue(message);
                 }
                 else {
@@ -97,7 +115,7 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
                 return true;
             }
 
-            if (message.StartsWith("{"))
+            if (message.StartsWith("{") || message.StartsWith("\"{"))
             {
                 return false;
             }
