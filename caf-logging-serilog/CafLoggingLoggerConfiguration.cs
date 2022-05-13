@@ -24,17 +24,15 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
 {
     public static class CafLoggingLoggerConfiguration
     {
-
-        private const string DefaultTemplate = 
-            "[{UtcDateTime(@t):yyyy-MM-dd HH:mm:ss.fffZ} {Tid(ProcessId,ThreadId)} {Log(@l):5} {Coalesce(Sanitize(tenantId, 12, 12), '-')} " +
-            "{Coalesce(Sanitize(correlationId, 4, 4), '-')}] {Sanitize(logger, 30, 30)}: {MaybeJsonMsgAndEx(@m,@x)}\n";
+        private const string DefaultTemplate =
+            "[{UtcDateTime(@t):yyyy-MM-dd HH:mm:ss.fffZ} {FormatThreadAndProcessId(ProcessId,ThreadId)} {Log(@l):5} {Coalesce(Sanitize(tenantId, 12, 12), '-')} " +
+            "{Coalesce(Sanitize(correlationId, 4, 4), '-')}] {Sanitize(logger, 30, 30)}: {ConvertMessageAndExceptionToJsonIfUnsafe(@m,@x)}\n";
 
         private static readonly StaticMemberNameResolver sanitizerFunctions = new(typeof(Sanitizer));
-        private static LoggingLevelSwitch defaultLoggingLevelSwitch = new LoggingLevelSwitch(LogEventLevel.Information);
-        private static string Caf_log_level_env = Environment.GetEnvironmentVariable("CAF_LOsG_LEVEL");
+        private static readonly LoggingLevelSwitch defaultLoggingLevelSwitch = new(LogEventLevel.Information);
+        private static readonly string Caf_log_level_env = Environment.GetEnvironmentVariable("CAF_LOG_LEVEL");
 
-
-        public static LoggerConfiguration CreateLogConfiguration(LoggingLevelSwitch? levelSwitch = null)
+        public static LoggerConfiguration CreateLogConfiguration()
         {
             return new LoggerConfiguration()
                 .WriteTo.Console(
@@ -46,10 +44,10 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
                 .Enrich.FromLogContext()
                 .Enrich.WithThreadId()
                 .Enrich.WithProcessId()
-                .MinimumLevel.ControlledBy(setLog());
+                .MinimumLevel.ControlledBy(SetLog());
         }
 
-        private static LoggingLevelSwitch setLog()
+        private static LoggingLevelSwitch SetLog()
         {
             try
             {

@@ -31,7 +31,5 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
             this.message = message;
             this.exception = exception;
         }
-
- 
     }
 }
