@@ -27,27 +27,12 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
 
         private static readonly StaticMemberNameResolver sanitizerFunctions = new(typeof(Sanitizer));
 
-        public static LoggerConfiguration CreateLogConfiguration()
+        public static LoggerConfiguration CreateLogConfiguration(LoggingLevelSwitch? levelSwitch = null)
         {
             return new LoggerConfiguration()
                 .WriteTo.Console(
                     new ExpressionTemplate(
                         DefaultTemplate,
-                        nameResolver: sanitizerFunctions),              // References the functions used in the default template
-                        standardErrorFromLevel: LogEventLevel.Verbose   // Redirects the logs to stderr
-                    )
-                .Enrich.FromLogContext()
-                .Enrich.WithThreadId()
-                .Enrich.WithProcessId()
-                .MinimumLevel.Verbose();
-        }
-
-        public static LoggerConfiguration CreateLogConfiguration(LoggingLevelSwitch levelSwitch)
-        { 
-            return new LoggerConfiguration()
-                .WriteTo.Console(
-                    new ExpressionTemplate(
-                        DefaultTemplate, 
                         nameResolver: sanitizerFunctions),              // References the functions used in the default template
                         levelSwitch: levelSwitch,                       // Overrides the log level
                         standardErrorFromLevel: LogEventLevel.Verbose   // Redirects the logs to stderr
