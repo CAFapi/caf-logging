@@ -1,7 +1,9 @@
 # CAF Logging Serilog
 This project configures Serilog to meet the CAF Logging Standard.
 
-The log level is controllable via value that can be provided on Logger initialization. The default used is `INFO`.
+The log level is controllable via an environment variable.
+- The `CAF_LOG_LEVEL` environment variable can be used to configure the required volume of logging.
+- By default `INFO`-level logging is used.
 
 All logs are being redirected to `stderr`.
 A consistent log message format is used.
