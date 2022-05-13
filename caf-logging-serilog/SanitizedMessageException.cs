@@ -16,13 +16,22 @@
 
 namespace MicroFocus.CafApi.CafLoggingSerilog
 {
-    internal class SanitizedMessage
+    internal class SanitizedMessageException
     {
         public string message;
+        public string? exception;
 
-        public SanitizedMessage(string message)
+        public SanitizedMessageException(string message)
         {
             this.message = message;
         }
+
+        public SanitizedMessageException(string message, string exception)
+        {
+            this.message = message;
+            this.exception = exception;
+        }
+
+ 
     }
 }

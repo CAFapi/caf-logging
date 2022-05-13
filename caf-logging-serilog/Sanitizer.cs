@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using Serilog.Events;
 using System;
 using System.Text.RegularExpressions;
@@ -85,23 +85,24 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
         public static LogEventPropertyValue? MaybeJsonMsgAndEx(LogEventPropertyValue? messageValue, LogEventPropertyValue? exceptionValue)
         {
 
-            if (messageValue is ScalarValue)
+            if (messageValue is ScalarValue sm &&
+            sm.Value is string rawMessage)
             {
                 var message = messageValue.ToString();
                 if (IsMessageSafeToLog(message) && null == exceptionValue)
                 {
-                    return new ScalarValue(message);
+                    return new ScalarValue(rawMessage);
                 }
                 else 
                 {
-                    if (null != exceptionValue)
+                    if (exceptionValue is ScalarValue exception)
                     {
-                        var exception = exceptionValue.ToString();
-                        return new ScalarValue(JsonConvert.SerializeObject(new SanitizedMessage(message, exception)));
+                        var output = JsonConvert.SerializeObject(new SanitizedMessageException(rawMessage, exception.ToString()));
+                        return new ScalarValue(output);
                     } 
                     else
                     {
-                        var jsonData = JsonConvert.SerializeObject(new SanitizedMessage("test"));
+                        var jsonData = JsonConvert.SerializeObject(new SanitizedMessage(rawMessage));
                         return new ScalarValue(jsonData);
                     }
                 }
