@@ -101,7 +101,8 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
                     } 
                     else
                     {
-                        return new ScalarValue(JsonConvert.SerializeObject(new SanitizedMessage(message)));
+                        var jsonData = JsonConvert.SerializeObject(new SanitizedMessage("test"));
+                        return new ScalarValue(jsonData);
                     }
                 }
             }
@@ -120,15 +121,23 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
                 return false;
             }
 
-            // Makes sure that each character is ASCII printable
-            // http://www.csc.villanova.edu/~tway/resources/ascii-table.html
+            return containSafeCharacters(message);
+        }
+
+        private static bool containSafeCharacters(string message)
+        {
+            int min = Convert.ToInt32("0x20", 16);
+            int max = Convert.ToInt32("0x7F", 16);
+
             foreach (char c in message)
             {
-                if (char.IsControl(c))
+                int x = c;
+                if (x < min && x >= max)
                 {
-                    return true;
+                    return false;
                 }
             }
+
             return true;
         }
     }

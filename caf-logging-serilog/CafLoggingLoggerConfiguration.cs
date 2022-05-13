@@ -18,16 +18,21 @@ using Serilog.Core;
 using Serilog.Events;
 using Serilog.Expressions;
 using Serilog.Templates;
+using System;
 
 namespace MicroFocus.CafApi.CafLoggingSerilog
 {
     public static class CafLoggingLoggerConfiguration
     {
-        private const string DefaultTemplate =
-            "[{@t:yyyy-MM-dd HH:mm:ss.fffZ} {Tid(ProcessId,ThreadId)} {Log(@l):5} {Sanitize(tenantId, 12, 12)} {Sanitize(correlationId, 4, 4)}] " +
-            "{Sanitize(logger, 30, 30)}: {MaybeJsonMsgAndEx(@m,@x)}\n";
+
+        private const string DefaultTemplate = 
+            "[{UtcDateTime(@t):yyyy-MM-dd HH:mm:ss.fffZ} {Tid(ProcessId,ThreadId)} {Log(@l):5} {Coalesce(Sanitize(tenantId, 12, 12), '-')} " +
+            "{Coalesce(Sanitize(correlationId, 4, 4), '-')}] {Sanitize(logger, 30, 30)}: {MaybeJsonMsgAndEx(@m,@x)}\n";
 
         private static readonly StaticMemberNameResolver sanitizerFunctions = new(typeof(Sanitizer));
+        private static LoggingLevelSwitch defaultLoggingLevelSwitch = new LoggingLevelSwitch(LogEventLevel.Information);
+        private static string Caf_log_level_env = Environment.GetEnvironmentVariable("CAF_LOsG_LEVEL");
+
 
         public static LoggerConfiguration CreateLogConfiguration(LoggingLevelSwitch? levelSwitch = null)
         {
@@ -36,13 +41,24 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
                     new ExpressionTemplate(
                         DefaultTemplate,
                         nameResolver: sanitizerFunctions),              // References the functions used in the default template
-                        levelSwitch: levelSwitch,                       // Overrides the log level
                         standardErrorFromLevel: LogEventLevel.Verbose   // Redirects the logs to stderr
                     )
                 .Enrich.FromLogContext()
                 .Enrich.WithThreadId()
                 .Enrich.WithProcessId()
-                .MinimumLevel.Verbose();
+                .MinimumLevel.ControlledBy(setLog());
+        }
+
+        private static LoggingLevelSwitch setLog()
+        {
+            try
+            {
+                var level = (LogEventLevel)Enum.Parse(typeof(LogEventLevel), Caf_log_level_env);
+                return new LoggingLevelSwitch(level);
+            }
+            catch (ArgumentException) {
+                return defaultLoggingLevelSwitch;
+            }            
         }
     }
 }
