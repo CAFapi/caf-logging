@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-namespace nuget_sample_caf_logging.MicroFocus.CafApi.CafLoggingSerilog
+namespace MicroFocus.CafApi.CafLoggingSerilog
 {
     internal class SanitizedMessage
     {

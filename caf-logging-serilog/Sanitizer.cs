@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 ﻿using Newtonsoft.Json;
-using nuget_sample_caf_logging.MicroFocus.CafApi.CafLoggingSerilog;
 using Serilog.Events;
 using System;
 using System.Text.RegularExpressions;
@@ -54,7 +53,6 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
 
             return null;
         }
-
 
         public static LogEventPropertyValue? Sanitize(LogEventPropertyValue? value, LogEventPropertyValue length, LogEventPropertyValue padding)
         {

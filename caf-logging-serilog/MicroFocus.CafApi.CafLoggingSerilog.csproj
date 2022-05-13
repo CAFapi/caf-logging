@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>nuget_sample_caf_logging</RootNamespace>
+    <RootNamespace>MicroFocus.CafApi.CafLoggingSerilog</RootNamespace>
     <OutputType>Library</OutputType>
     <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
