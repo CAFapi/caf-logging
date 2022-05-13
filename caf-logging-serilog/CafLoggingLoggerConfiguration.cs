@@ -23,7 +23,9 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
 {
     public static class CafLoggingLoggerConfiguration
     {
-        private const string DefaultTemplate = "[{@t:yyyy-MM-dd HH:mm:ss.fffZ} {Tid(ProcessId,ThreadId)} {Log(@l):5} {Sanitize(tenantId, 12, 12)} {Sanitize(correlationId, 4, 4)}] {Sanitize(logger, 30, 30)}: {MaybeJsonMsgAndEx(@m,@x)}\n";
+        private const string DefaultTemplate =
+            "[{@t:yyyy-MM-dd HH:mm:ss.fffZ} {Tid(ProcessId,ThreadId)} {Log(@l):5} {Sanitize(tenantId, 12, 12)} {Sanitize(correlationId, 4, 4)}] " +
+            "{Sanitize(logger, 30, 30)}: {MaybeJsonMsgAndEx(@m,@x)}\n";
 
         private static readonly StaticMemberNameResolver sanitizerFunctions = new(typeof(Sanitizer));
 
