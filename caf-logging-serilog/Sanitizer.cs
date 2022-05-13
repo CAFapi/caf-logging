@@ -124,7 +124,6 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
             return ContainSafeCharacters(message);
         }
 
-        // character is `safe` if in range 0x20 <= c < 0x7F
         private static bool ContainSafeCharacters(string message)
         {
             int min = Convert.ToInt32("0x20", 16);
@@ -133,7 +132,7 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
             foreach (char c in message)
             {
                 int x = c;
-                if (min <= x && x < max)
+                if (x < min || x >= max)
                 {
                     return false;
                 }
