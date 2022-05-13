@@ -56,7 +56,7 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
         }
 
 
-        public static LogEventPropertyValue? Sanitize(LogEventPropertyValue? value, LogEventPropertyValue? length, LogEventPropertyValue? padding)
+        public static LogEventPropertyValue? Sanitize(LogEventPropertyValue? value, LogEventPropertyValue length, LogEventPropertyValue padding)
         {
 
             if (value is ScalarValue)
@@ -79,7 +79,6 @@ namespace MicroFocus.CafApi.CafLoggingSerilog
                 }
                 newValue = newValue.PadRight(valuePadding, ' ');
                 return new ScalarValue(newValue);
-
             }
 
             return null;

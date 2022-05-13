@@ -19,7 +19,7 @@ namespace nuget_sample_caf_logging.MicroFocus.CafApi.CafLoggingSerilog
     internal class SanitizedMessage
     {
         public string message;
-        public string exception;
+        public string? exception;
 
         public SanitizedMessage(string message)
         {
@@ -31,6 +31,5 @@ namespace nuget_sample_caf_logging.MicroFocus.CafApi.CafLoggingSerilog
             this.message = message;
             this.exception = exception;
         }
-
     }
 }
