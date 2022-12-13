@@ -1,5 +1,5 @@
 # CAF Logging
-This project configures Logback and Log4j2 to meet the CAF Logging Standard.
+This project configures Logback, Log4j2 and Serilog (see [Serilog](caf-logging-serilog/README.md) section) to meet the CAF Logging Standard.
 
 - The log level is controllable via an environment variable.  
     - The `CAF_LOG_LEVEL` environment variable can be used to configure the required volume of logging.  
