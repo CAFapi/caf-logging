@@ -75,7 +75,7 @@ public class CustomThrowableProxyConverterTest {
 
         Assert.assertTrue(result.contains("Test exception"));
         // We expect only 2 stack trace lines
-        final int stackTraceLineCount = (int) result.lines().filter(line -> line.contains("at")).count();
+        final int stackTraceLineCount = (int) Arrays.stream(result.split("\\R")).filter(line -> line.contains("at")).count();
         Assert.assertEquals(2, stackTraceLineCount);
     }
 
@@ -89,7 +89,7 @@ public class CustomThrowableProxyConverterTest {
 
         Assert.assertTrue(result.contains("Test exception"));
         // We expect only 2 stack trace lines
-        final int stackTraceLineCount = (int) result.lines().filter(line -> line.contains("at")).count();
+        final int stackTraceLineCount = (int) Arrays.stream(result.split("\\R")).filter(line -> line.contains("at")).count();
         Assert.assertEquals(1, stackTraceLineCount);
     }
 
@@ -103,7 +103,7 @@ public class CustomThrowableProxyConverterTest {
 
         Assert.assertTrue(result.contains("Test exception"));
         // We expect only 2 stack trace lines
-        final int stackTraceLineCount = (int) result.lines().filter(line -> line.contains("at")).count();
+        final int stackTraceLineCount = (int) Arrays.stream(result.split("\\R")).filter(line -> line.contains("at")).count();
         //2 entries from com.example
         //1 entry from java.lang
         Assert.assertEquals(3, stackTraceLineCount);
@@ -119,7 +119,7 @@ public class CustomThrowableProxyConverterTest {
 
         Assert.assertTrue(result.contains("Test exception"));
         // We expect all stack trace lines because the maxLines parameter is invalid
-        final int stackTraceLineCount = (int) result.lines().filter(line -> line.contains("at")).count();
+        final int stackTraceLineCount = (int) Arrays.stream(result.split("\\R")).filter(line -> line.contains("at")).count();
         Assert.assertTrue(2 < stackTraceLineCount); // assuming the stack trace contains more than 2 lines
     }
 }
