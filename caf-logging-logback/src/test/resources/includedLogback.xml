@@ -18,11 +18,4 @@
 <included>
     <property name="packages" value="com.github;org.github"/>
     <property name="maxStackTraceLines" value="4"/>
-    <property name="patternExtension" value="[%mdc{logData}]"/>
-    <logger name="com.hpe.ajp.service.batch" level="${DARWIN_AJP_EN_BATCH_LOG_LEVEL:-INFO}" />
-    <logger name="com.hpe.cc.service.exception.app" level="${DARWIN_AJP_APPLICATION_EXCEPTION:-OFF}" />
-    <logger name="com.hpe.cc.service.appresources" level="${DARWIN_AJP_APP_RES:-INFO}" />
-    <logger name="com.hpe" level="${DARWIN_LOG_LEVEL:-INFO}" />
-    <logger name="liquibase" level="${LIQUIBASE_LOG_LEVEL:-ERROR}" />
-    <logger name="org.eclipse.jetty.server.RequestLog" level="${DARWIN_AJP_REQUEST_LOG_LEVEL:-WARN}" />
 </included>
