@@ -100,7 +100,7 @@ public class LogInjectionTests
         // Assert that the exception message is in the log
         Assert.assertThat(log, containsString(exceptionMsg));
         Assert.assertThat(log, containsString("com.github"));
-        Assert.assertThat(log, not(containsString("jdk.internal")));
+        Assert.assertThat(log, not(containsString("org.apache")));
 
         // Assert that the function name is in the log (as that probably means that the stack trace is present)
         Assert.assertThat(log, containsString("testLogExceptionMessage"));

@@ -22,20 +22,35 @@ import ch.qos.logback.classic.spi.ThrowableProxyUtil;
 import ch.qos.logback.core.CoreConstants;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class CustomThrowableProxyConverter extends RootCauseFirstThrowableProxyConverter {
-    private List<String> filteredPackages;
-    private int maxStackTraceSize;
+    private final List<String> filteredPackages;
+    private final int maxStackTraceSize;
 
     public CustomThrowableProxyConverter(final String packages, final String maxLines) {
+        filteredPackages = getFilteredPackages(packages);
+        maxStackTraceSize = getMaxStackTraceSize(maxLines);
+    }
+
+    private static List<String> getFilteredPackages(final String packages)
+    {
+        final List<String> filteredPackages;
         if (null != packages && !packages.isEmpty()) {
             filteredPackages = Arrays.asList(packages.split(";"));
+        } else {
+            filteredPackages = Collections.emptyList();
         }
+        return filteredPackages;
+    }
+
+    private static int getMaxStackTraceSize(final String maxLines)
+    {
         try {
-            maxStackTraceSize = Integer.parseInt(maxLines);
+            return Integer.parseInt(maxLines);
         } catch (final NumberFormatException e) {
-            maxStackTraceSize = Integer.MAX_VALUE; // default behavior to print all lines if parsing fails
+            return Integer.MAX_VALUE; // default behavior to print all lines if parsing fails
         }
     }
 
@@ -66,9 +81,6 @@ public class CustomThrowableProxyConverter extends RootCauseFirstThrowableProxyC
     }
 
     private boolean isIncludedPackage(final String className) {
-        if (null == filteredPackages || filteredPackages.isEmpty()) {
-            return true; // No filtering applied, include all packages
-        }
-        return filteredPackages.stream().anyMatch(className::startsWith);
+        return filteredPackages.isEmpty() || filteredPackages.stream().anyMatch(className::startsWith);
     }
 }

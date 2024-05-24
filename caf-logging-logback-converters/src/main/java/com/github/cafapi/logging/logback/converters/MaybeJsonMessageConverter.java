@@ -90,7 +90,8 @@ public final class MaybeJsonMessageConverter extends ThrowableHandlingConverter
             return sb.toString();
         }
     }
-    private String getStacktraceLineLimit(final List<String> optionList)
+
+    private static String getStacktraceLineLimit(final List<String> optionList)
     {
         if (Objects.nonNull(optionList) && 1 < optionList.size()) {
             final String s = optionList.get(1);
