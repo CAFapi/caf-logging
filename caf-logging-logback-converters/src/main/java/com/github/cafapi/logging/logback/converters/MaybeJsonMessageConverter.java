@@ -47,7 +47,7 @@ public final class MaybeJsonMessageConverter extends ThrowableHandlingConverter
     {
         final List<String> optionList = getOptionList();
         final String packages = getPackages(optionList);
-        final String maxLines = getStacktraceLineLimit(optionList);
+        final String maxLines = getMaxStackTraceLines(optionList);
 
         if (null != packages || null != maxLines) {
             throwableConverter = new CustomThrowableProxyConverter(packages, maxLines);
@@ -91,7 +91,7 @@ public final class MaybeJsonMessageConverter extends ThrowableHandlingConverter
         }
     }
 
-    private static String getStacktraceLineLimit(final List<String> optionList)
+    private static String getMaxStackTraceLines(final List<String> optionList)
     {
         if (Objects.nonNull(optionList) && 1 < optionList.size()) {
             final String s = optionList.get(1);
