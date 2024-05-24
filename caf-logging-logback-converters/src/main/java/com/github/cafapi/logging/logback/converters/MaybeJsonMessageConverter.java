@@ -34,7 +34,7 @@ import org.apache.commons.text.StrBuilder;
 public final class MaybeJsonMessageConverter extends ThrowableHandlingConverter
 {
     private static final JsonFactory jsonFactory = JsonFactoryCreator.create();
-    public static final String HYPHEN = "-";
+    private static final String HYPHEN = "-";
     private ClassicConverter throwableConverter;
 
     public MaybeJsonMessageConverter()
