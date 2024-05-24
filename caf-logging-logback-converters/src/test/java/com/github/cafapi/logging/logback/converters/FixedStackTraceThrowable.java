@@ -15,15 +15,17 @@
  */
 package com.github.cafapi.logging.logback.converters;
 
-public class FixedStackTraceThrowable extends Throwable {
-    private static final StackTraceElement[] STACK_TRACE = new StackTraceElement[] {
+public class FixedStackTraceThrowable extends Throwable
+{
+    private static final StackTraceElement[] STACK_TRACE = new StackTraceElement[]{
         new StackTraceElement("org.junit.TestClass", "testMethod", "TestClass.java", 10),
         new StackTraceElement("com.example.MyClass", "myMethod", "MyClass.java", 20),
         new StackTraceElement("com.example.MyClass2", "myMethod2", "MyClass2.java", 21),
         new StackTraceElement("java.lang.Thread", "getStackTrace", "Thread.java", 30)
     };
 
-    public FixedStackTraceThrowable(String message) {
+    public FixedStackTraceThrowable(String message)
+    {
         super(message);
         setStackTrace(STACK_TRACE);
     }

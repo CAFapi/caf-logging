@@ -16,6 +16,6 @@
 
 -->
 <included>
-    <property name="packages" value="com.github;org.github"/>
-    <property name="maxStackTraceLines" value="4"/>
+    <property name="packages" value="com.github;org.github" />
+    <property name="maxStackTraceLines" value="4" />
 </included>

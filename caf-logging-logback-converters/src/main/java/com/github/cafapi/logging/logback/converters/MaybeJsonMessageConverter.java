@@ -112,5 +112,4 @@ public final class MaybeJsonMessageConverter extends ThrowableHandlingConverter
         }
         return null;
     }
-
 }

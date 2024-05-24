@@ -25,17 +25,20 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CustomThrowableProxyConverterTest {
+public class CustomThrowableProxyConverterTest
+{
     private TestableCustomThrowableProxyConverter converter;
 
     @Before
-    public void setUp() {
+    public void setUp()
+    {
         // Reset the converter before each test
         converter = null;
     }
 
     @Test
-    public void testNoFilteringNoLimitation() {
+    public void testNoFilteringNoLimitation()
+    {
         converter = new TestableCustomThrowableProxyConverter(null, null);
         final Exception exception = new Exception("Test1 exception");
         final IThrowableProxy tp = new ThrowableProxy(exception);
@@ -47,7 +50,8 @@ public class CustomThrowableProxyConverterTest {
     }
 
     @Test
-    public void testPackageFiltering() {
+    public void testPackageFiltering()
+    {
         converter = new TestableCustomThrowableProxyConverter("org.junit", "10");
         final Throwable throwable = new FixedStackTraceThrowable("Test exception");
         final IThrowableProxy tp = new ThrowableProxy(throwable);
@@ -58,15 +62,16 @@ public class CustomThrowableProxyConverterTest {
 
         final String[] lines = result.split(CoreConstants.LINE_SEPARATOR);
         Assert.assertFalse(Arrays.stream(lines)
-                .skip(1) // Skip the first line as it contains the exception message
-                .anyMatch(line -> line.contains("java.lang")));
+            .skip(1) // Skip the first line as it contains the exception message
+            .anyMatch(line -> line.contains("java.lang")));
         Assert.assertTrue(Arrays.stream(lines)
-                .skip(1) // Skip the first line as it contains the exception message
-                .allMatch(line -> line.contains("org.junit")));
+            .skip(1) // Skip the first line as it contains the exception message
+            .allMatch(line -> line.contains("org.junit")));
     }
 
     @Test
-    public void testMaxStackTraceSize() {
+    public void testMaxStackTraceSize()
+    {
         converter = new TestableCustomThrowableProxyConverter(null, "2");
         final Throwable throwable = new FixedStackTraceThrowable("Test exception");
         final IThrowableProxy tp = new ThrowableProxy(throwable);
@@ -80,7 +85,8 @@ public class CustomThrowableProxyConverterTest {
     }
 
     @Test
-    public void testPackageFilteringAndMaxStackTraceSize() {
+    public void testPackageFilteringAndMaxStackTraceSize()
+    {
         converter = new TestableCustomThrowableProxyConverter("com.example", "1");
         final Throwable throwable = new FixedStackTraceThrowable("Test exception");
         final IThrowableProxy tp = new ThrowableProxy(throwable);
@@ -94,7 +100,8 @@ public class CustomThrowableProxyConverterTest {
     }
 
     @Test
-    public void testPackageFilteringAndNullMaxStackTraceSize() {
+    public void testPackageFilteringAndNullMaxStackTraceSize()
+    {
         converter = new TestableCustomThrowableProxyConverter("com.example;java.lang", null);
         final Throwable throwable = new FixedStackTraceThrowable("Test exception");
         final IThrowableProxy tp = new ThrowableProxy(throwable);
@@ -110,7 +117,8 @@ public class CustomThrowableProxyConverterTest {
     }
 
     @Test
-    public void testInvalidMaxLinesParameter() {
+    public void testInvalidMaxLinesParameter()
+    {
         converter = new TestableCustomThrowableProxyConverter(null, "invalid");
         final Throwable throwable = new FixedStackTraceThrowable("Test exception");
         final IThrowableProxy tp = new ThrowableProxy(throwable);

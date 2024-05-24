@@ -17,13 +17,15 @@ package com.github.cafapi.logging.logback.converters;
 
 import ch.qos.logback.classic.spi.IThrowableProxy;
 
-class TestableCustomThrowableProxyConverter extends CustomThrowableProxyConverter {
-
-    public TestableCustomThrowableProxyConverter(final String packages, final String maxLines) {
+class TestableCustomThrowableProxyConverter extends CustomThrowableProxyConverter
+{
+    public TestableCustomThrowableProxyConverter(final String packages, final String maxLines)
+    {
         super(packages, maxLines);
     }
 
-    public String throwableProxyToStringPublic(final IThrowableProxy tp) {
+    public String throwableProxyToStringPublic(final IThrowableProxy tp)
+    {
         return throwableProxyToString(tp);
     }
 }

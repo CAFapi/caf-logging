@@ -25,11 +25,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-class CustomThrowableProxyConverter extends RootCauseFirstThrowableProxyConverter {
+class CustomThrowableProxyConverter extends RootCauseFirstThrowableProxyConverter
+{
     private final List<String> filteredPackages;
     private final int maxStackTraceSize;
 
-    public CustomThrowableProxyConverter(final String packages, final String maxLines) {
+    public CustomThrowableProxyConverter(final String packages, final String maxLines)
+    {
         filteredPackages = getFilteredPackages(packages);
         maxStackTraceSize = getMaxStackTraceSize(maxLines);
     }
@@ -55,7 +57,8 @@ class CustomThrowableProxyConverter extends RootCauseFirstThrowableProxyConverte
     }
 
     @Override
-    protected void subjoinSTEPArray(final StringBuilder buf, final int indent, final IThrowableProxy tp) {
+    protected void subjoinSTEPArray(final StringBuilder buf, final int indent, final IThrowableProxy tp)
+    {
         final StackTraceElementProxy[] stepArray = tp.getStackTraceElementProxyArray();
         int stackTracePrinted = 0;
 
@@ -80,7 +83,8 @@ class CustomThrowableProxyConverter extends RootCauseFirstThrowableProxyConverte
         }
     }
 
-    private boolean isIncludedPackage(final String className) {
+    private boolean isIncludedPackage(final String className)
+    {
         return filteredPackages.isEmpty() || filteredPackages.stream().anyMatch(className::startsWith);
     }
 }
