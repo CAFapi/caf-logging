@@ -101,7 +101,7 @@ public final class MaybeJsonMessageConverter extends ThrowableHandlingConverter
         return null;
     }
 
-    private String getPackages(final List<String> optionList)
+    private static String getPackages(final List<String> optionList)
     {
         if (Objects.nonNull(optionList) && !optionList.isEmpty()) {
             final String s = optionList.get(0);
