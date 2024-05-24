@@ -39,7 +39,6 @@ public final class MaybeJsonMessageConverter extends ThrowableHandlingConverter
 
     public MaybeJsonMessageConverter()
     {
-
     }
 
     @Override
