@@ -51,8 +51,7 @@ public final class MaybeJsonMessageConverter extends ThrowableHandlingConverter
 
         if (null != packages || null != maxLines) {
             throwableConverter = new CustomThrowableProxyConverter(packages, maxLines);
-        } else
-        {
+        } else {
             throwableConverter = new RootCauseFirstThrowableProxyConverter();
         }
         throwableConverter.start();
