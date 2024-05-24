@@ -15,12 +15,10 @@
  */
 package com.github.cafapi.logging.logback.converters;
 
-import java.util.Arrays;
-
 import ch.qos.logback.classic.spi.IThrowableProxy;
 import ch.qos.logback.classic.spi.ThrowableProxy;
 import ch.qos.logback.core.CoreConstants;
-
+import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

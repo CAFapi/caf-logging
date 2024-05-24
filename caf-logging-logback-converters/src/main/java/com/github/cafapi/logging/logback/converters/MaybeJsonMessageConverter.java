@@ -28,7 +28,6 @@ import com.github.cafapi.logging.common.UnexpectedIOException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
-
 import org.apache.commons.text.StrBuilder;
 
 public final class MaybeJsonMessageConverter extends ThrowableHandlingConverter
