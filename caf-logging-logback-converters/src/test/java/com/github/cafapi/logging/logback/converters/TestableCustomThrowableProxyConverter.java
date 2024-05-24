@@ -17,7 +17,7 @@ package com.github.cafapi.logging.logback.converters;
 
 import ch.qos.logback.classic.spi.IThrowableProxy;
 
-public class TestableCustomThrowableProxyConverter extends CustomThrowableProxyConverter {
+class TestableCustomThrowableProxyConverter extends CustomThrowableProxyConverter {
 
     public TestableCustomThrowableProxyConverter(final String packages, final String maxLines) {
         super(packages, maxLines);

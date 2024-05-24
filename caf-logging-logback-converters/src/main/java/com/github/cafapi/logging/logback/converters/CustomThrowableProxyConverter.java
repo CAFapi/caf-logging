@@ -25,7 +25,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class CustomThrowableProxyConverter extends RootCauseFirstThrowableProxyConverter {
+class CustomThrowableProxyConverter extends RootCauseFirstThrowableProxyConverter {
     private final List<String> filteredPackages;
     private final int maxStackTraceSize;
 
