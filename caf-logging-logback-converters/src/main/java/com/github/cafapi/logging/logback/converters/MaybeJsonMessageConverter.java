@@ -26,21 +26,32 @@ import com.github.cafapi.logging.common.JsonFactoryCreator;
 import com.github.cafapi.logging.common.LogMessageValidator;
 import com.github.cafapi.logging.common.UnexpectedIOException;
 import java.io.IOException;
+import java.util.List;
+import java.util.Objects;
 import org.apache.commons.text.StrBuilder;
 
 public final class MaybeJsonMessageConverter extends ThrowableHandlingConverter
 {
     private static final JsonFactory jsonFactory = JsonFactoryCreator.create();
-    private final ClassicConverter throwableConverter;
+    private static final String HYPHEN = "-";
+    private ClassicConverter throwableConverter;
 
     public MaybeJsonMessageConverter()
     {
-        this.throwableConverter = new RootCauseFirstThrowableProxyConverter();
     }
 
     @Override
     public void start()
     {
+        final List<String> optionList = getOptionList();
+        final String packages = getPackages(optionList);
+        final String maxLines = getMaxStackTraceLines(optionList);
+
+        if (null != packages || null != maxLines) {
+            throwableConverter = new CustomThrowableProxyConverter(packages, maxLines);
+        } else {
+            throwableConverter = new RootCauseFirstThrowableProxyConverter();
+        }
         throwableConverter.start();
         super.start();
     }
@@ -75,5 +86,28 @@ public final class MaybeJsonMessageConverter extends ThrowableHandlingConverter
 
             return sb.toString();
         }
+    }
+
+    private static String getMaxStackTraceLines(final List<String> optionList)
+    {
+        if (Objects.nonNull(optionList) && 1 < optionList.size()) {
+            final String s = optionList.get(1);
+            if (s.equals(HYPHEN)) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    private static String getPackages(final List<String> optionList)
+    {
+        if (Objects.nonNull(optionList) && !optionList.isEmpty()) {
+            final String s = optionList.get(0);
+            if (s.equals(HYPHEN)) {
+                return null;
+            }
+            return s;
+        }
+        return null;
     }
 }
