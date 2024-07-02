@@ -24,15 +24,17 @@ import java.nio.charset.StandardCharsets;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.ThreadContext;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class LogInjectionTests
 {
-    //@Test
+    @Disabled("Disabled test")
+    @Test
     public void testLogMessageWithNewline() throws Exception
     {
         // Use tenant and correlation ids that have newlines in them
@@ -57,18 +59,18 @@ public class LogInjectionTests
         final long logLineCount = countLines(log);
 
         // Assert that the message lines are in the log
-        Assert.assertThat(log, containsString(messageLine1));
-        Assert.assertThat(log, containsString(messageLine2));
+        assertThat(log, containsString(messageLine1));
+        assertThat(log, containsString(messageLine2));
 
         // Assert that the combined message line isn't in the log
         // (because that would mean that the newline hasn't been removed or encoded)
-        Assert.assertThat(log, not(containsString(combinedMessageLine)));
+        assertThat(log, not(containsString(combinedMessageLine)));
 
         // Assert that the format arguments have been inserted as expected
-        Assert.assertThat(log, containsString("10 green bottles"));
+        assertThat(log, containsString("10 green bottles"));
 
         // Assert that there has been 1 line logged for each log message
-        Assert.assertThat(logLineCount, is(2L));
+        assertThat(logLineCount, is(2L));
     }
 
     @Test
@@ -98,13 +100,13 @@ public class LogInjectionTests
         final long logLineCount = countLines(log);
 
         // Assert that the exception message is in the log
-        Assert.assertThat(log, containsString(exceptionMsg));
+        assertThat(log, containsString(exceptionMsg));
 
         // Assert that the function name is in the log (as that probably means that the stack trace is present)
-        Assert.assertThat(log, containsString("testLogExceptionMessage"));
+        assertThat(log, containsString("testLogExceptionMessage"));
 
         // Assert that there has been just 1 line logged
-        Assert.assertThat(logLineCount, is(1L));
+        assertThat(logLineCount, is(1L));
     }
 
     private static final class StdErrRedirector implements AutoCloseable

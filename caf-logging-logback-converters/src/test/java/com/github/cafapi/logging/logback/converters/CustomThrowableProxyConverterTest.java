@@ -18,16 +18,19 @@ package com.github.cafapi.logging.logback.converters;
 import ch.qos.logback.classic.spi.IThrowableProxy;
 import ch.qos.logback.classic.spi.ThrowableProxy;
 import ch.qos.logback.core.CoreConstants;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 
 public class CustomThrowableProxyConverterTest
 {
     private TestableCustomThrowableProxyConverter converter;
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
         // Reset the converter before each test
@@ -43,8 +46,8 @@ public class CustomThrowableProxyConverterTest
 
         final String result = converter.throwableProxyToStringPublic(tp);
 
-        Assert.assertTrue(result.contains("Test1 exception"));
-        Assert.assertTrue(result.contains("CustomThrowableProxyConverterTest.testNoFilteringNoLimitation"));
+        assertTrue(result.contains("Test1 exception"));
+        assertTrue(result.contains("CustomThrowableProxyConverterTest.testNoFilteringNoLimitation"));
     }
 
     @Test
@@ -56,13 +59,13 @@ public class CustomThrowableProxyConverterTest
 
         final String result = converter.throwableProxyToStringPublic(tp);
 
-        Assert.assertTrue(result.contains("Test exception"));
+        assertTrue(result.contains("Test exception"));
 
         final String[] lines = result.split(CoreConstants.LINE_SEPARATOR);
-        Assert.assertFalse(Arrays.stream(lines)
+        assertFalse(Arrays.stream(lines)
             .skip(1) // Skip the first line as it contains the exception message
             .anyMatch(line -> line.contains("java.lang")));
-        Assert.assertTrue(Arrays.stream(lines)
+        assertTrue(Arrays.stream(lines)
             .skip(1) // Skip the first line as it contains the exception message
             .allMatch(line -> line.contains("org.junit")));
     }
@@ -76,10 +79,10 @@ public class CustomThrowableProxyConverterTest
 
         final String result = converter.throwableProxyToStringPublic(tp);
 
-        Assert.assertTrue(result.contains("Test exception"));
+        assertTrue(result.contains("Test exception"));
         // We expect only 2 stack trace lines
         final int stackTraceLineCount = (int) Arrays.stream(result.split("\\R")).filter(line -> line.contains("at")).count();
-        Assert.assertEquals(2, stackTraceLineCount);
+        assertEquals(2, stackTraceLineCount);
     }
 
     @Test
@@ -91,10 +94,10 @@ public class CustomThrowableProxyConverterTest
 
         final String result = converter.throwableProxyToStringPublic(tp);
 
-        Assert.assertTrue(result.contains("Test exception"));
+        assertTrue(result.contains("Test exception"));
         // We expect only 2 stack trace lines
         final int stackTraceLineCount = (int) Arrays.stream(result.split("\\R")).filter(line -> line.contains("at")).count();
-        Assert.assertEquals(1, stackTraceLineCount);
+        assertEquals(1, stackTraceLineCount);
     }
 
     @Test
@@ -106,12 +109,12 @@ public class CustomThrowableProxyConverterTest
 
         final String result = converter.throwableProxyToStringPublic(tp);
 
-        Assert.assertTrue(result.contains("Test exception"));
+        assertTrue(result.contains("Test exception"));
         // We expect only 2 stack trace lines
         final int stackTraceLineCount = (int) Arrays.stream(result.split("\\R")).filter(line -> line.contains("at")).count();
         //2 entries from com.example
         //1 entry from java.lang
-        Assert.assertEquals(3, stackTraceLineCount);
+        assertEquals(3, stackTraceLineCount);
     }
 
     @Test
@@ -123,9 +126,9 @@ public class CustomThrowableProxyConverterTest
 
         final String result = converter.throwableProxyToStringPublic(tp);
 
-        Assert.assertTrue(result.contains("Test exception"));
+        assertTrue(result.contains("Test exception"));
         // We expect all stack trace lines because the maxLines parameter is invalid
         final int stackTraceLineCount = (int) Arrays.stream(result.split("\\R")).filter(line -> line.contains("at")).count();
-        Assert.assertTrue(2 < stackTraceLineCount); // assuming the stack trace contains more than 2 lines
+        assertTrue(2 < stackTraceLineCount); // assuming the stack trace contains more than 2 lines
     }
 }
