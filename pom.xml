@@ -69,6 +69,7 @@
         <module>caf-logging-logback</module>
         <module>caf-logging-logback-converters</module>
         <module>caf-logging-logback-access-converters</module>
+        <module>caf-logging-serilog</module>
     </modules>
 
     <properties>
@@ -149,5 +150,17 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 </project>
