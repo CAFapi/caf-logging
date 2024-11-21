@@ -15,7 +15,7 @@
  */
 package com.github.cafapi.logging.common;
 
-import com.hpe.caf.util.processidentifier.ProcessIdentifier;
+import com.github.cafapi.common.util.processidentifier.ProcessIdentifier;
 import java.util.Locale;
 
 public final class ProcessAndThreadIdProvider
