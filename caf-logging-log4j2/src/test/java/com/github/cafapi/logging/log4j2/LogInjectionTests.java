@@ -33,8 +33,7 @@ import org.junit.jupiter.api.Test;
 
 public class LogInjectionTests
 {
-    @Disabled("Disabled test")
-    @Test
+//    @Test
     public void testLogMessageWithNewline() throws Exception
     {
         // Use tenant and correlation ids that have newlines in them
