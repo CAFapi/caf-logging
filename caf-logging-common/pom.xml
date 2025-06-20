@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 
     Copyright 2019-2025 Open Text.
@@ -28,6 +29,7 @@
     </parent>
 
     <artifactId>caf-logging-common</artifactId>
+    <name>caf-logging-common</name>
 
     <dependencies>
         <dependency>

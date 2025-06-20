@@ -28,6 +28,7 @@
     </parent>
 
     <artifactId>caf-logging-log4j2</artifactId>
+    <name>caf-logging-log4j2</name>
 
     <properties>
         <enforceBannedDependencies>false</enforceBannedDependencies>

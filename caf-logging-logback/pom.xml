@@ -28,6 +28,7 @@
     </parent>
 
     <artifactId>caf-logging-logback</artifactId>
+    <name>caf-logging-logback</name>
 
     <dependencies>
         <dependency>

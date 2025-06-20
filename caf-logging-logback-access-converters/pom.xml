@@ -28,6 +28,7 @@
     </parent>
 
     <artifactId>caf-logging-logback-access-converters</artifactId>
+    <name>caf-logging-logback-access-converters</name>
 
     <dependencies>
         <dependency>
