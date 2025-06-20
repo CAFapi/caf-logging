@@ -28,6 +28,7 @@
     </parent>
 
     <artifactId>caf-logging-common</artifactId>
+    <name>caf-logging-common</name>
 
     <dependencies>
         <dependency>
